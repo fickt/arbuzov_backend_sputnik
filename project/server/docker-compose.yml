@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   app:
     container_name: app
@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: app/Dockerfile
     volumes:
-      - ./app:/var/www/laravel-docker
+      - ./app:/var/www
     depends_on:
-      - db
+      - web
 
   web:
     build:
@@ -16,22 +16,15 @@ services:
       dockerfile: nginx/Dockerfile
     container_name: web
     ports:
-      - "80:80"
+      - ${WEB_SERVER_PORT:-8080}:${WEB_SERVER_PORT:-8080}
     volumes:
-      - ./html/:/var/www/html/
-      - ./logs/nginx:/var/log/nginx/
-    depends_on:
-      - app
-
+      - ./app:/var/www
 
   db:
-    image: mysql:8
+    image: postgres:15
     container_name: db
     ports:
-      - ${DB_PORT}:${DB_PORT}
-    volumes:
-      - ./db:/var/lib/mysql
-
+      - ${DB_PORT:-5432}:${DB_PORT:-5432}
     environment:
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_PASSWORD=${DB_PASSWORD?}
