@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_resort_wishlist', function (Blueprint $table) {
             $table->bigInteger('user_id')->nullable(false);
             $table->bigInteger('resort_id')->nullable(false);
+            $table->dateTime('visit_date');
 
             $table->foreign('user_id')
                 ->references('id')
