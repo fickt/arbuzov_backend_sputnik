@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_photos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->bigInteger('user_id');
+            $table->binary()
         });
     }
 
