@@ -21,7 +21,10 @@ return new class extends Migration
             $table->boolean('is_blocked')->default(false);
             $table->bigInteger('role_id')->index()->nullable(false);
 
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onDelete('cascade');
         });
     }
 
