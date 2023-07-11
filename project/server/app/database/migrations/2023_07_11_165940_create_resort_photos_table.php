@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_photos', function (Blueprint $table) {
+        Schema::create('resort_photos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->bigInteger('resort_id');
             $table->string('photo');
 
-            $table->foreign('user_id')
+            $table->foreign('resort_id')
                 ->references('id')
-                ->on('users')
+                ->on('resorts')
                 ->onDelete('cascade');
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_photos');
+        Schema::dropIfExists('resort_photos');
     }
 };
