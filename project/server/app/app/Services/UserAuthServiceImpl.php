@@ -8,23 +8,22 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserAuthServiceImpl
+class UserAuthServiceImpl implements UserAuthServiceInterface
 {
-    public function registerUser(RegistrationRequest $request){
+    public function registerUser(RegistrationRequest $request)
+    {
         $user = User::create(
             array_merge(
                 $request->validated(),
                 ['password' => bcrypt($request->password)]
             )
         );
-        return response()->json(
-            [
-                'user' => new UserResource($user)
-            ],
-            ResponseAlias::HTTP_CREATED
-        );
-    }
-    public function loginUser(LoginRequest $request){
 
+        return response(new UserResource($user))->setStatusCode(ResponseAlias::HTTP_CREATED);
+
+    }
+
+    public function loginUser(LoginRequest $request)
+    {
     }
 }
