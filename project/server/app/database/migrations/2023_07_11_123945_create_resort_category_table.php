@@ -15,10 +15,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resort_category', function (Blueprint $table) {
+        Schema::create('category_resort', function (Blueprint $table) {
             $table->bigInteger('resort_id');
             $table->bigInteger('category_id');
-            $table->primary(['resort_id', 'category_id']);
 
             $table->foreign('resort_id')
                 ->references('id')

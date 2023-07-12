@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_resort_ratings', function (Blueprint $table) {
+        Schema::create('resort_user_ratings', function (Blueprint $table) {
             $table->bigInteger('user_id')->nullable(false);
             $table->bigInteger('resort_id')->nullable(false);
             $table->integer('rating')->default(0);
