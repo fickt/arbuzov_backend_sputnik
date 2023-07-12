@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nickname', 255)->nullable(false)->unique();
-            $table->string('first_name',255)->nullable(false);
-            $table->string('last_name',255)->nullable(false);
+            $table->string('nickname', 255)->nullable()->unique();
+            $table->string('first_name',255)->nullable();
+            $table->string('last_name',255)->nullable();
             $table->string('email',255)->nullable(false)->unique();
             $table->string('password',255)->nullable(false);
             $table->boolean('is_blocked')->default(false);

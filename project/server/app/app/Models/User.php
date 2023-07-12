@@ -14,6 +14,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $timestamps = false;
 
     /**
      * Get the role associated with the user.
