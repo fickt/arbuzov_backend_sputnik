@@ -23,7 +23,6 @@ class UserAuthService implements UserAuthServiceInterface
         );
 
         return response(new UserResource($user), ResponseAlias::HTTP_CREATED);
-
     }
 
     public function loginUser(LoginRequest $request): JsonResponse

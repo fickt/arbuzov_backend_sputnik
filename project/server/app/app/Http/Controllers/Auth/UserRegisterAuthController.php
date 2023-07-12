@@ -1,10 +1,13 @@
 <?php
 
-namespace app\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\RegistrationRequest;
 
-class UserRegisterAuthController extends Controller
+class UserRegisterAuthController extends BaseAuthController
 {
-    //
+    public function __invoke(RegistrationRequest $request)
+    {
+        return $this->service->registerUser($request);
+    }
 }

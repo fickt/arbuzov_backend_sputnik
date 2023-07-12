@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\Auth\UserRegisterAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 /* Authentication */
-/*Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
     Route::post('/registration', UserRegisterAuthController::class);
-    Route::post('/login', UserLoginAuthController::class);
-    Route::post('/logout', UserLogoutAuthController::class);
-});*/
+   /* Route::post('/login', UserLoginAuthController::class);
+    Route::post('/logout', UserLogoutAuthController::class);*/
+});

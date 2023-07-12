@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->nullable(false);
             $table->bigInteger('resort_id')->nullable(false);
             $table->integer('rating')->default(0);
-            $table->
+            $table->text('comment');
 
             $table->foreign('user_id')
                 ->references('id')
