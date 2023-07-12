@@ -14,6 +14,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
     /**
      * Get the role associated with the user.
      */

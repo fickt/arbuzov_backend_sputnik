@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\Auth\UserRegisterAuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /* Authentication */
 Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
-    Route::post('/registration', [App\Http\Controllers\Auth\UserRegisterAuthController::class, 'create']);
-    Route::get('/hi', function () {
-        echo 'hi there!';
-    });
+    Route::post('/registration', [UserController::class, 'create']);
+
    /* Route::post('/login', UserLoginAuthController::class);
     Route::post('/logout', UserLogoutAuthController::class);*/
 });
