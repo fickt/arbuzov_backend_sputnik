@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Mockery\Exception;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserAuthServiceImpl implements UserAuthServiceInterface
+class UserAuthService implements UserAuthServiceInterface
 {
     public function registerUser(RegistrationRequest $request): ResponseFactory
     {
