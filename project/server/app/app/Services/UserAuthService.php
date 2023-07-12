@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Services;
+namespace App\Services;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
@@ -15,6 +15,7 @@ class UserAuthService implements UserAuthServiceInterface
 {
     public function registerUser(RegistrationRequest $request): ResponseFactory
     {
+        print_r('HI THERE!!!');
         $user = User::create(
             array_merge(
                 $request->validated(),

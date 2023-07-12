@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});*/
+});
 
 /* Authentication */
 Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
-    Route::post('/registration', UserRegisterAuthController::class);
+    Route::post('/registration', [App\Http\Controllers\Auth\UserRegisterAuthController::class, 'create']);
+    Route::get('/hi', function () {
+        echo 'hi there!';
+    });
    /* Route::post('/login', UserLoginAuthController::class);
     Route::post('/logout', UserLogoutAuthController::class);*/
 });
