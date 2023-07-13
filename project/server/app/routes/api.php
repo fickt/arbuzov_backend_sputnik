@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* Authentication */
+/* Authorization */
 Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
     Route::post('/registration', [UserController::class, 'create']);
     Route::post('/login', [UserController::class, 'login']);
-    //Route::post('/logout', UserLogoutAuthController::class);*/
+    Route::post('/logout', [UserController::class, 'logout']);
 });

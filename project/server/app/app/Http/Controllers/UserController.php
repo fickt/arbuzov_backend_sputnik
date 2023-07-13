@@ -38,12 +38,21 @@ class UserController extends Controller
      * @param LoginRequest $request - email, password
      * @return JsonResponse - JWT-token
      */
-    public function login(LoginRequest $request): JsonResponse {
+    public function login(LoginRequest $request): JsonResponse
+    {
         if (!$token = auth()->attempt($request->validated())) {
             throw new Exception('Unauthorized');//UnauthorizedException('Unauthorized');
         }
 
         return $this->createJwtToken($token);
+    }
+
+    public function logout(): JsonResponse
+    {
+        auth()->logout();
+        return response()->json([
+            'message' => 'User has logged out!',
+        ]);
     }
 
     /**
