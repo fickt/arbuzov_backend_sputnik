@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email',255)->nullable(false)->unique();
             $table->string('password',255)->nullable(false);
             $table->boolean('is_blocked')->default(false);
-            $table->bigInteger('role_id')->index()->nullable(false);
+            $table->bigInteger('role_id')->index()->nullable();
 
             $table->foreign('role_id')
                 ->references('id')
