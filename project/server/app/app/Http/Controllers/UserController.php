@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\UserResource;
-
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Routing\ResponseFactory;
 use Mockery\Exception;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends Controller
 {
@@ -22,9 +18,9 @@ class UserController extends Controller
     /**
      * Регистрация и создание пользователя с ролью user
      * @param RegistrationRequest $request - email, password и confirmed_password
-     * @return ResponseFactory - зарегистрированный пользователь
+     * @return UserResource - зарегистрированный пользователь
      */
-    public function create(RegistrationRequest $request): ResponseFactory
+    public function create(RegistrationRequest $request): UserResource
     {
         $user = User::create(
             array_merge(
@@ -34,7 +30,7 @@ class UserController extends Controller
         );
         $userRole = Role::find(self::ROLE_USER_ID);
         $userRole->users()->save($user);
-        return response(new UserResource($user), ResponseAlias::HTTP_CREATED);
+        return new UserResource($user);
     }
 
     /**
@@ -46,6 +42,7 @@ class UserController extends Controller
         if (!$token = auth()->attempt($request->validated())) {
             throw new Exception('Unauthorized');//UnauthorizedException('Unauthorized');
         }
+
         return $this->createJwtToken($token);
     }
 
@@ -58,7 +55,7 @@ class UserController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'user' => auth()->user(),
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 }
