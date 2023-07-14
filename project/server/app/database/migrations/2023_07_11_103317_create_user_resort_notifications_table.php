@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_resort_notifications', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->nullable(false);
+            $table->bigInteger('user_id')->nullable();
             $table->string('title', 255)->nullable(false);
             $table->text('content')->nullable(false);
-            $table->dateTime('sent_at')->nullable(false);
+            $table->dateTime('sent_at')->nullable();
 
             $table->foreign('user_id')
                 ->references('id')

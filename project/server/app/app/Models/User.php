@@ -3,14 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Events\UserCreatedEvent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @mixin Builder
@@ -21,12 +22,21 @@ class User extends Authenticatable implements JWTSubject
 
     public $timestamps = false;
 
+    protected $dispatchesEvents = [
+        'created' => UserCreatedEvent::class,
+    ];
+
     /**
      * Get the role associated with the user.
      */
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
     }
 
     protected $guarded = [

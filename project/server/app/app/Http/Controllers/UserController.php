@@ -7,9 +7,9 @@ use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Role;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use Mockery\Exception;
 
 class UserController extends Controller
 {
@@ -36,6 +36,7 @@ class UserController extends Controller
     /**
      * Авторизация пользователя
      * @param LoginRequest $request - email, password
+     * @throws Exception
      * @return JsonResponse - JWT-token
      */
     public function login(LoginRequest $request): JsonResponse
