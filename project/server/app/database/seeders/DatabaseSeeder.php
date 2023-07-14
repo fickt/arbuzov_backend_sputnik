@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Resort;
+use App\Models\ResortCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,12 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         RoleSeeder::run();
         UserSeeder::run();
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
+        ResortCategory::factory(5)->create();
+        Resort::factory(10)->create();
     }
 }

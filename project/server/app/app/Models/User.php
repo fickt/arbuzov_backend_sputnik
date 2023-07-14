@@ -26,19 +26,6 @@ class User extends Authenticatable implements JWTSubject
         'created' => UserCreatedEvent::class,
     ];
 
-    /**
-     * Get the role associated with the user.
-     */
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function notifications(): HasMany
-    {
-        return $this->hasMany(Notification::class);
-    }
-
     protected $guarded = [
         'is_blocked',
         'role_id'
@@ -76,6 +63,24 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the role associated with the user.
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Получить все уведомления user
+     *
+     * @return HasMany
+     */
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 
     public function getJWTIdentifier()
     {
