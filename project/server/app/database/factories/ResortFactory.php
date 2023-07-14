@@ -17,7 +17,10 @@ class ResortFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->company(),
+            'description' => fake()->text(100),
+            'latitude' => fake()->latitude(),
+            'longitude' => fake()->longitude()
         ];
     }
 }

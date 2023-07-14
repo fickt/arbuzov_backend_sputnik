@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\ResortFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,11 +33,16 @@ class Resort extends Model
      */
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(ResortCategory::class, 'category_resort');
+        return $this->belongsToMany(
+            ResortCategory::class,
+            'category_resort',
+            'resort_id',
+            'category_id'
+        );
     }
 
-    protected static function newFactory(): Factory
+    protected static function newFactory(): ResortFactory
     {
-        return FlightFactory::new();
+        return ResortFactory::new();
     }
 }

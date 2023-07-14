@@ -24,7 +24,12 @@ class ResortCategory extends Model
      */
     public function resorts(): BelongsToMany
     {
-        return $this->belongsToMany(Resort::class, 'category_resort');
+        return $this->belongsToMany(
+            Resort::class,
+            'category_resort',
+            'category_id',
+            'resort_id'
+        );
     }
 
     protected static function newFactory(): ResortCategoryFactory
