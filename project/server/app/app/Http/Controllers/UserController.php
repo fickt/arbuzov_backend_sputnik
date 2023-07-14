@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends Controller
 {
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         if (!$token = auth()->attempt($request->validated())) {
-            throw new Exception('Unauthorized');//UnauthorizedException('Unauthorized');
+            throw new Exception('Unauthorized', ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
         return $this->createJwtToken($token);
