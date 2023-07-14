@@ -18,6 +18,7 @@ class UserController extends Controller
 
     /**
      * Регистрация и создание пользователя с ролью user
+     *
      * @param RegistrationRequest $request - email, password и confirmed_password
      * @return UserResource - зарегистрированный пользователь
      */
@@ -29,6 +30,7 @@ class UserController extends Controller
                 ['password' => bcrypt($request->password)]
             )
         );
+
         $userRole = Role::find(self::ROLE_USER_ID);
         $userRole->users()->save($user);
         return new UserResource($user);
@@ -36,6 +38,7 @@ class UserController extends Controller
 
     /**
      * Авторизация пользователя
+     *
      * @param LoginRequest $request - email, password
      * @throws Exception
      * @return JsonResponse - JWT-token
@@ -49,6 +52,11 @@ class UserController extends Controller
         return $this->createJwtToken($token);
     }
 
+    /**
+     * Разлогировать текущего user
+     *
+     * @return JsonResponse
+     */
     public function logout(): JsonResponse
     {
         auth()->logout();
