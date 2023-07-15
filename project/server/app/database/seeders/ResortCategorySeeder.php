@@ -15,7 +15,7 @@ class ResortCategorySeeder extends Seeder
      */
     public static function run(): void
     {
-        ResortCategory::createMany(
+        ResortCategory::insert([
             [
                 'name' => 'Category 1'
             ],
@@ -34,6 +34,6 @@ class ResortCategorySeeder extends Seeder
             [
                 'name' => 'Category 6'
             ]
-        );
+        ]);
     }
 }

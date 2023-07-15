@@ -15,6 +15,6 @@ class ResortSeeder extends Seeder
      */
     public static function run(): void
     {
-        Resort::factory()->create(self::RESORT_NUMBER);
+        Resort::factory(self::RESORT_NUMBER)->create();
     }
 }

@@ -13,13 +13,13 @@ class RoleSeeder extends Seeder
      */
     public static function run(): void
     {
-        Role::createMany(
+        Role::insert([
             [
                 'name' => 'user'
             ],
             [
                 'name' => 'admin'
-            ]
+            ]]
         );
     }
 }

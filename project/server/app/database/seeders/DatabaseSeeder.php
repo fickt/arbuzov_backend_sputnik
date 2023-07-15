@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Resort;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         RoleSeeder::run();
         UserSeeder::run();
-        Resort::factory(10)->create();
+        ResortSeeder::run();
         ResortCategorySeeder::run();
         ResortCategoryToResortSeeder::run();
     }
