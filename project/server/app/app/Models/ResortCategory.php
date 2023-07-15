@@ -26,7 +26,7 @@ class ResortCategory extends Model
     {
         return $this->belongsToMany(
             Resort::class,
-            'category_resort',
+            'resort_category',
             'category_id',
             'resort_id'
         );

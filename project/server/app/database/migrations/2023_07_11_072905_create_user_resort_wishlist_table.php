@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resort_user_wishlist', function (Blueprint $table) {
+        Schema::create('user_resort_wishlist', function (Blueprint $table) {
             $table->bigInteger('user_id')->nullable(false);
             $table->bigInteger('resort_id')->nullable(false);
             $table->dateTime('visit_date');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resort_user_wishlist');
+        Schema::dropIfExists('user_resort_wishlist');
     }
 };

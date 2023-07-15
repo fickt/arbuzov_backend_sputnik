@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_resort', function (Blueprint $table) {
+        Schema::create('resort_category', function (Blueprint $table) {
             $table->bigInteger('resort_id');
             $table->bigInteger('category_id');
 
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_resort');
+        Schema::dropIfExists('resort_category');
     }
 };
