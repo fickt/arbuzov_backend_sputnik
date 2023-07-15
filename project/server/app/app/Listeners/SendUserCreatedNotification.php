@@ -34,8 +34,6 @@ class SendUserCreatedNotification
                 ->user()
                 ->associate($admin)
                 ->save();
-
-            // $notification->user()->associate($admin)->save();
         });
     }
 }
