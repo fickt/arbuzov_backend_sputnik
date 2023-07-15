@@ -1,2 +1,3 @@
 
 *.log
+project/server/app/storage/logs/laravel.log
