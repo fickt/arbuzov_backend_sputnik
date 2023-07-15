@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         UserSeeder::run();
         Resort::factory(10)->create();
         ResortCategorySeeder::run();
+        ResortCategoryToResortSeeder::run();
     }
 }

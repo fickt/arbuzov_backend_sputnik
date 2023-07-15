@@ -8,11 +8,13 @@ use Illuminate\Database\Seeder;
 
 class ResortSeeder extends Seeder
 {
+    private const RESORT_NUMBER = 5;
+
     /**
-     * Run the database seeds.
+     * Создаёт места отдыха
      */
     public static function run(): void
     {
-        Resort::factory()->create(5);
+        Resort::factory()->create(self::RESORT_NUMBER);
     }
 }

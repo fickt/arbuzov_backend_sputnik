@@ -9,15 +9,17 @@ use Illuminate\Database\Seeder;
 class RoleSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Создаёт роли юзера и админа.
      */
     public static function run(): void
     {
-        Role::create([
-            'name' => 'user'
-        ]);
-        Role::create([
-            'name' => 'admin'
-        ]);
+        Role::createMany(
+            [
+                'name' => 'user'
+            ],
+            [
+                'name' => 'admin'
+            ]
+        );
     }
 }
