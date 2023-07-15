@@ -5,7 +5,8 @@ ER-diagram link: https://dbdiagram.io/d/64a54e1902bd1c4a5e89b178
 В терминал вводим: 
 1. docker-compose up
 2. docker exec app php artisan migrate:fresh  --seed
-3. По идее должно работать :)
+3. docker exec app php artisan key:generate
+4. По идее должно работать :)
 
 I.Эндпоинты:
 
