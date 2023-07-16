@@ -25,16 +25,18 @@ class SendUserCreatedNotificationListener
      */
     public function handle(UserCreatedEvent $event): void
     {
-        User::query()->whereHas('role', function ($role) {
+        $admins = User::query()->whereHas('role', function ($role) {
             $role->where('name', '=', Roles::ADMIN);
-        })->each(function ($admin) use ($event) {
+        })->get();
+
+        foreach ($admins as $admin) {
             Notification::query()->create([
                 'title' => 'New user has registered!',
                 'content' => 'New user with email: ' . $event->getUser()->email . ' has registered!',
-                'sent_at' => Carbon::now()->toDateTimeString()])
+                'sent_at' => Carbon::now()])
                 ->user()
                 ->associate($admin)
                 ->save();
-        });
+        }
     }
 }
