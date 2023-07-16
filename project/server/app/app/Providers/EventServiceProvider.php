@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use App\Events\UserCreatedEvent;
-use app\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
-use app\Listeners\UserCreatedEventListeners\SendUserCreatedNotificationListener;
+use App\Events\UserCreatingEvent;
+use App\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
+use App\Listeners\UserCreatedEventListeners\SendUserCreatedNotificationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -20,8 +21,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        UserCreatingEvent::class => [
+            AssignUserRoleToUserListener::class
+        ],
         UserCreatedEvent::class => [
-            AssignUserRoleToUserListener::class,
+           // AssignUserRoleToUserListener::class,
             SendUserCreatedNotificationListener::class
         ]
     ];

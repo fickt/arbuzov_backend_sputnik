@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Events\UserCreatedEvent;
+use App\Events\UserCreatingEvent;
+use App\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
     public $timestamps = false;
 
     protected $dispatchesEvents = [
+        'creating' => UserCreatingEvent::class,
         'created' => UserCreatedEvent::class,
     ];
 

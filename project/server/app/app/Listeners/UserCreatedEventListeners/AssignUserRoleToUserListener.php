@@ -3,7 +3,7 @@
 namespace app\Listeners\UserCreatedEventListeners;
 
 use App\Enums\Roles;
-use App\Events\UserCreatedEvent;
+use App\Events\UserCreatingEvent;
 use App\Models\Role;
 
 class AssignUserRoleToUserListener
@@ -20,12 +20,18 @@ class AssignUserRoleToUserListener
      * Handle the event.
      *
      */
-    public function handle(UserCreatedEvent $event): void
+    public function handle(UserCreatingEvent $event): void
     {
+        /**
+         * @var Role $userRole
+         */
         $userRole = Role::query()
             ->where('name', '=', Roles::USER)
             ->first();
+       // echo 'lolka';
+        $event->getUser()->role()->associate($userRole);
+        //$userRole->users()->save($event->getUser());
 
-        $event->getUser()->role()->associate($userRole)->save();
+      //  $event->getUser()->setRelation('role', $userRole);
     }
 }
