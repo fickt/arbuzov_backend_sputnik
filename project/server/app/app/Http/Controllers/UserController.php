@@ -24,15 +24,12 @@ class UserController extends Controller
      */
     public function create(RegistrationRequest $request): UserResource
     {
-        $user = User::create(
-            array_merge(
-                $request->validated(),
-                ['password' => bcrypt($request->password)]
-            )
-        );
+        $user = User::query()->create((
+            $request->validated()
+        ));
 
-        $userRole = Role::find(self::ROLE_USER_ID);
-        $userRole->users()->save($user);
+        /*$userRole = Role::find(self::ROLE_USER_ID);
+        $userRole->users()->save($user);*/
         return new UserResource($user);
     }
 

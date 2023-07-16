@@ -2,12 +2,13 @@
 
 namespace App\Listeners;
 
+use App\Enums\Roles;
 use App\Events\UserCreatedEvent;
 use App\Models\Notification;
 use App\Models\User;
 use Carbon\Carbon;
 
-class SendUserCreatedNotification
+class SendUserCreatedNotificationListener
 {
     /**
      * Create the event listener.
@@ -25,7 +26,7 @@ class SendUserCreatedNotification
     public function handle(UserCreatedEvent $event): void
     {
         User::whereHas('role', function ($role) {
-            $role->where('name', '=', 'admin');
+            $role->where('name', '=', Roles::ADMIN);
         })->each(function ($admin) use ($event) {
             Notification::create([
                 'title' => 'New user has registered!',
