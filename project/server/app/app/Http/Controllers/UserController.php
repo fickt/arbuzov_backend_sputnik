@@ -27,6 +27,7 @@ class UserController extends Controller
         $user = User::query()->create((
             $request->validated()
         ));
+        
         return new UserResource($user);
     }
 
