@@ -15,7 +15,7 @@ class Notification extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $table = "user_resort_notifications";
+    public $table = "user_notifications";
 
     protected $fillable = [
         'title',
