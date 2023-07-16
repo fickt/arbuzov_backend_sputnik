@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends Controller
 {
-    private const ROLE_USER_ID = 1;
 
     /**
      * Регистрация и создание пользователя с ролью user
