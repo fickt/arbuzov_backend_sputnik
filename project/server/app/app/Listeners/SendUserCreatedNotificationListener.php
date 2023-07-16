@@ -30,7 +30,7 @@ class SendUserCreatedNotificationListener
         })->each(function ($admin) use ($event) {
             Notification::create([
                 'title' => 'New user has registered!',
-                'content' => 'New user with email: ' . $event->user->email . ' has registered!',
+                'content' => 'New user with email: ' . $event->getUser()->email . ' has registered!',
                 'sent_at' => Carbon::now()->toDateTimeString()])
                 ->user()
                 ->associate($admin)

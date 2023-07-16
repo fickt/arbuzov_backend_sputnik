@@ -27,9 +27,6 @@ class UserController extends Controller
         $user = User::query()->create((
             $request->validated()
         ));
-
-        /*$userRole = Role::find(self::ROLE_USER_ID);
-        $userRole->users()->save($user);*/
         return new UserResource($user);
     }
 

@@ -26,6 +26,6 @@ class AssignUserRoleToUserListener
             ->where('name', '=', Roles::USER)
             ->first();
 
-        $event->user->role()->associate($userRole)->save();
+        $event->getUser()->role()->associate($userRole)->save();
     }
 }
