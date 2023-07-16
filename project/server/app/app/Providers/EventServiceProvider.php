@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Events\UserCreatedEvent;
-use App\Listeners\AssignUserRoleToUserListener;
-use App\Listeners\SendUserCreatedNotificationListener;
+use app\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
+use app\Listeners\UserCreatedEventListeners\SendUserCreatedNotificationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace app\Listeners\UserCreatedEventListeners;
 
 use App\Enums\Roles;
 use App\Events\UserCreatedEvent;
