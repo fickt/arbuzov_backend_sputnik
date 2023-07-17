@@ -29,6 +29,7 @@ services:
     ports:
       - ${DB_PORT:-5432}:${DB_PORT:-5432}
     environment:
+        - POSTGRES_HOST_AUTH_METHOD=trust
         - POSTGRES_DB=${DB_DATABASE:-postgres}
         - POSTGRES_USER=${DB_USER:-root}
         - POSTGRES_PASSWORD=${DB_PASSWORD?}
