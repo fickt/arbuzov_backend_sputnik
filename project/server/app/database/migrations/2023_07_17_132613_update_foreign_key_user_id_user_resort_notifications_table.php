@@ -11,7 +11,6 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('user_notifications', function ($table) {
-           // $table->dropForeign(['user_id']);
             $table->foreignId('user_id')->nullable(false)->change();
 
             $table->foreign('user_id')
