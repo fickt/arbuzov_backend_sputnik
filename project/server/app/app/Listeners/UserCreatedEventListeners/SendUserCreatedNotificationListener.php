@@ -30,13 +30,13 @@ class SendUserCreatedNotificationListener
         })->get();
 
         foreach ($admins as $admin) {
-            Notification::query()->create([
+            $notification = new Notification();
+            $notification->fill([
                 'title' => 'New user has registered!',
                 'content' => 'New user with email: ' . $event->getUser()->email . ' has registered!',
-                'sent_at' => Carbon::now()])
-                ->user()
-                ->associate($admin)
-                ->save();
+                'sent_at' => Carbon::now()]);
+
+            $notification->user()->associate($admin)->save();
         }
     }
 }
