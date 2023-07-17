@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_resort_wishlist', function ($table) {
-            $table->dropForeign(['user_id']);
+        Schema::table('resort_category', function ($table) {
+            $table->dropForeign(['category_id']);
             $table->dropForeign(['resort_id']);
 
-            $table->foreignId('user_id')->change();
+            $table->foreignId('category_id')->change();
             $table->foreignId('resort_id')->change();
 
-            $table->foreign('user_id')
+            $table->foreign('category_id')
                 ->references('id')
-                ->on('users')
+                ->on('resort_categories')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate()
                 ->change();
@@ -39,22 +39,24 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_resort_wishlist', function ($table) {
-            $table->dropForeign(['user_id']);
+        Schema::table('resort_category', function ($table) {
+            $table->dropForeign(['category_id']);
             $table->dropForeign(['resort_id']);
 
-            $table->bigInteger('user_id')->change();
+            $table->bigInteger('category_id')->change();
             $table->bigInteger('resort_id')->change();
 
-            $table->foreign('user_id')
+            $table->foreign('category_id')
                 ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+                ->on('resort_categories')
+                ->cascadeOnDelete()
+                ->change();
 
             $table->foreign('resort_id')
                 ->references('id')
                 ->on('resorts')
-                ->onDelete('cascade');
+                ->cascadeOnDelete()
+                ->change();
         });
     }
 };

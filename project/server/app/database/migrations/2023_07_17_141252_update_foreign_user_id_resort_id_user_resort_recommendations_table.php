@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_resort_wishlist', function ($table) {
+        Schema::table('user_resort_recommendations', function ($table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['resort_id']);
 
@@ -39,7 +39,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_resort_wishlist', function ($table) {
+        Schema::table('user_resort_recommendations', function ($table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['resort_id']);
 
@@ -49,12 +49,14 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade');
+                ->cascadeOnDelete()
+                ->change();
 
             $table->foreign('resort_id')
                 ->references('id')
                 ->on('resorts')
-                ->onDelete('cascade');
+                ->cascadeOnDelete()
+                ->change();
         });
     }
 };
