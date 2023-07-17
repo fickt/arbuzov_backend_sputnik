@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\RolesEnum;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Resources\LogoutResource;
 use App\Http\Resources\UserResource;
-use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -25,7 +24,7 @@ class UserController extends Controller
     public function create(RegistrationRequest $request): UserResource
     {
         $user = User::query()->create((
-            $request->validated()
+        $request->validated()
         ));
 
         return new UserResource($user);
@@ -35,8 +34,8 @@ class UserController extends Controller
      * Авторизация пользователя
      *
      * @param LoginRequest $request - email, password
-     * @throws Exception
      * @return JsonResponse - JWT-token
+     * @throws Exception
      */
     public function login(LoginRequest $request): JsonResponse
     {
@@ -50,14 +49,12 @@ class UserController extends Controller
     /**
      * Разлогировать текущего user
      *
-     * @return JsonResponse
+     * @return LogoutResource
      */
-    public function logout(): JsonResponse
+    public function logout(): LogoutResource
     {
         auth()->logout();
-        return response()->json([
-            'message' => 'User has logged out!',
-        ]);
+        return new LogoutResource();
     }
 
     /**
