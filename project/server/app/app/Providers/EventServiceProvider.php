@@ -25,7 +25,6 @@ class EventServiceProvider extends ServiceProvider
             AssignUserRoleToUserListener::class
         ],
         UserCreatedEvent::class => [
-           // AssignUserRoleToUserListener::class,
             SendUserCreatedNotificationListener::class
         ]
     ];

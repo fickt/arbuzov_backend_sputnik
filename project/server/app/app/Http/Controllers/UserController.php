@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Roles;
+use App\Enums\RolesEnum;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\UserResource;
@@ -27,7 +27,7 @@ class UserController extends Controller
         $user = User::query()->create((
             $request->validated()
         ));
-        
+
         return new UserResource($user);
     }
 

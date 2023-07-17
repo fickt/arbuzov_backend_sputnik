@@ -2,7 +2,7 @@
 
 namespace app\Listeners\UserCreatedEventListeners;
 
-use App\Enums\Roles;
+use App\Enums\RolesEnum;
 use App\Events\UserCreatedEvent;
 use App\Models\Notification;
 use App\Models\User;
@@ -26,7 +26,7 @@ class SendUserCreatedNotificationListener
     public function handle(UserCreatedEvent $event): void
     {
         $admins = User::query()->whereHas('role', function ($role) {
-            $role->where('name', '=', Roles::ADMIN);
+            $role->where('name', '=', RolesEnum::ADMIN);
         })->get();
 
         foreach ($admins as $admin) {
