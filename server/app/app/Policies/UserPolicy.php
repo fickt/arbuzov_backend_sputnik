@@ -14,48 +14,48 @@ class UserPolicy
     public function viewAny(
         ?User $user
     ): Response {
-        return $this->deny();
+        return $this->authorized();
     }
 
     public function view(
         ?User $user,
         User $model
     ): Response {
-        return $this->deny();
+        return $this->authorized();
     }
 
     public function create(
         User $user
     ): Response {
-        return $this->allow();
+        return $this->authorized();
     }
 
     public function update(
         ?User $user,
         User $model
     ): Response {
-        return $this->deny();
+        return $this->authorized();
     }
 
     public function delete(
         ?User $user,
         User $model
     ): Response {
-        return $this->deny();
+        return $this->authorized();
     }
 
     public function restore(
         ?User $user,
         User $model
     ): Response {
-        return $this->deny();
+        return $this->authorized();
     }
 
     public function forceDelete(
         ?User $user,
         User $model
     ): Response {
-        return $this->deny();
+        return $this->authorized();
     }
 
 }

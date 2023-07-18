@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\LogoutResource;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\UserAuthResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -19,15 +19,15 @@ class AuthController extends Controller
      * Регистрация и создание пользователя с ролью user
      *
      * @param RegistrationRequest $request - email, password и confirmed_password
-     * @return UserResource - зарегистрированный пользователь
+     * @return UserAuthResource - зарегистрированный пользователь
      */
-    public function create(RegistrationRequest $request): UserResource
+    public function create(RegistrationRequest $request): UserAuthResource
     {
         $user = User::query()->create((
         $request->validated()
         ));
 
-        return new UserResource($user);
+        return new UserAuthResource($user);
     }
 
     /**

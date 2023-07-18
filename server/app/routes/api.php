@@ -1,11 +1,13 @@
 <?php
 
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
+use Orion\Tests\Fixtures\App\Http\Requests\UserRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +25,13 @@ use Orion\Facades\Orion;
 });*/
 
 
-/*
-Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
-    Route::post('', [UserAuthController::class, 'create']);
-    Route::post('/login', [UserAuthController::class, 'login']);
-    Route::post('/logout', [UserAuthController::class, 'logout']);
-});*/
+Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
+    Route::post('', [AuthController::class, 'create']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
-Route::group(['as' => 'api.'], function() {
+Route::group(['as' => 'api.'], function () {
     Orion::resource('users', UserController::class);
 });
 
