@@ -3,9 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RolesEnum;
 use App\Events\UserCreatedEvent;
 use App\Events\UserCreatingEvent;
 use App\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -75,6 +77,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
+    public static function boot(): void
+    {
+        self::creating(fn(self $model) => $model->assignUserRoleToUser());
+        self::created(fn(self $model) => $model->sendUserCreatedNotificationsToAdmins());
+        parent::boot();
+    }
+
+
     /**
      * Получить все уведомления user
      *
@@ -93,5 +103,31 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    private function sendUserCreatedNotificationsToAdmins()
+    {
+        $admins = User::query()->whereHas('role', function ($role) {
+            $role->where('name', '=', RolesEnum::ADMIN);
+        })->get();
+
+        foreach ($admins as $admin) {
+            $notification = new Notification();
+            $notification->fill([
+                'title' => 'New user has registered!',
+                'content' => 'New user with email: ' . $this->getEmailForVerification() . ' has registered!',
+                'sent_at' => Carbon::now()]);
+
+            $notification->user()->associate($admin)->save();
+        }
+
+    }
+
+    private function assignUserRoleToUser()
+    {
+        $userRole = Role::query()
+            ->where('name', '=', RolesEnum::USER)
+            ->first();
+        $this->role()->associate($userRole);
     }
 }

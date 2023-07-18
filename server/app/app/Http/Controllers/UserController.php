@@ -14,7 +14,7 @@ class UserController extends Controller
 {
 
     use DisableAuthorization;
-    
+
     protected $model = User::class;
     protected $policy = UserPolicy::class;
     protected $request = RegistrationRequest::class;

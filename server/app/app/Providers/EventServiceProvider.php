@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
+    /*    Registered::class => [
             SendEmailVerificationNotification::class,
         ],
         UserCreatingEvent::class => [
@@ -26,7 +26,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserCreatedEvent::class => [
             SendUserCreatedNotificationListener::class
-        ]
+        ]*/
     ];
 
     /**
