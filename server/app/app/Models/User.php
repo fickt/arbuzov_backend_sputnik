@@ -26,11 +26,6 @@ class User extends Authenticatable implements JWTSubject
 
     public $timestamps = false;
 
-    protected $dispatchesEvents = [
-        'creating' => UserCreatingEvent::class,
-        'created' => UserCreatedEvent::class,
-    ];
-
     protected $guarded = [
         'is_blocked',
         'role_id'
