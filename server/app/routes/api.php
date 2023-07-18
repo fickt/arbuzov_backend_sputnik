@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,13 +22,15 @@ use Orion\Facades\Orion;
     return $request->user();
 });*/
 
-/* Authorization */
-/*Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
-    Route::post('', [UserController::class, 'create']);
-    Route::post('/login', [UserController::class, 'login']);
-    Route::post('/logout', [UserController::class, 'logout']);
+
+/*
+Route::group(['middleware' => 'api', 'prefix' => 'users'], function () {
+    Route::post('', [UserAuthController::class, 'create']);
+    Route::post('/login', [UserAuthController::class, 'login']);
+    Route::post('/logout', [UserAuthController::class, 'logout']);
 });*/
 
 Route::group(['as' => 'api.'], function() {
     Orion::resource('users', UserController::class);
 });
+

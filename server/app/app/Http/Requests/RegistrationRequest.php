@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Orion\Http\Requests\Request;
 
-class RegistrationRequest extends FormRequest
+class RegistrationRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,7 +19,7 @@ class RegistrationRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
+    public function storeRules(): array
     {
         return [
             'email' => 'required|string|email|min:1|max:255|unique:users',
