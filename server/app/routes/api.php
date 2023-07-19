@@ -4,6 +4,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\HasAuthority;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
@@ -32,6 +33,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
 });
 
 Route::group(['as' => 'api.'], function () {
-    Orion::resource('users', UserController::class);
+    Orion::resource('users', UserController::class)->middleware(HasAuthority::class);
 });
 

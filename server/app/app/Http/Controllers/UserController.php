@@ -12,6 +12,6 @@ class UserController extends Controller
 {
     protected $model = User::class;
     protected $policy = UserPolicy::class;
-    //protected $request = UserRequest::class;
+    protected $request = UserRequest::class;
     protected $resource = UserResource::class;
 }

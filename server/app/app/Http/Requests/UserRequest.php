@@ -12,7 +12,7 @@ class UserRequest extends Request
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function storeRules(): array
+    public function updateRules(): array
     {
         return [
             'nickname' => 'string|min:1|max:255',
