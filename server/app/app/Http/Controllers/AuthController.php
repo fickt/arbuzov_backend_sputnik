@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Resources\loginResource;
 use App\Http\Resources\LogoutResource;
 use App\Http\Resources\UserAuthResource;
 use App\Models\User;
@@ -15,20 +16,6 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class AuthController extends Controller
 {
-    /**
-     * Регистрация и создание пользователя с ролью user
-     *
-     * @param RegistrationRequest $request - email, password и confirmed_password
-     * @return UserAuthResource - зарегистрированный пользователь
-     */
-    public function create(RegistrationRequest $request): UserAuthResource
-    {
-        $user = User::query()->create((
-        $request->validated()
-        ));
-
-        return new UserAuthResource($user);
-    }
 
     /**
      * Авторизация пользователя
