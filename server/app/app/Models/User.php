@@ -100,25 +100,24 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    private function sendUserCreatedNotificationsToAdmins()
+    private function sendUserCreatedNotificationsToAdmins(): void
     {
         $admins = User::query()->whereHas('role', function ($role) {
             $role->where('name', '=', RolesEnum::ADMIN);
         })->get();
 
         foreach ($admins as $admin) {
-            $notification = new Notification();
-            $notification->fill([
+            Notification::query()->create([
                 'title' => 'New user has registered!',
                 'content' => 'New user with email: ' . $this->getEmailForVerification() . ' has registered!',
-                'sent_at' => Carbon::now()]);
-
-            $notification->user()->associate($admin)->save();
+                'user_id' => $admin->id,
+                'sent_at' => Carbon::now()
+            ]);
         }
 
     }
 
-    private function assignUserRoleToUser()
+    private function assignUserRoleToUser(): void
     {
         $userRole = Role::query()
             ->where('name', '=', RolesEnum::USER)
