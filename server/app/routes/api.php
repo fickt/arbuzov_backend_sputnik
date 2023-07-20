@@ -33,6 +33,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
 });
 
 Route::group(['as' => 'api.'], function () {
-    Orion::resource('users', UserController::class);//->middleware(HasAuthority::class);
+    Orion::resource('users', UserController::class);
 });
 
