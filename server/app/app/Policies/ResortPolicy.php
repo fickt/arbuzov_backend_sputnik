@@ -13,55 +13,55 @@ class ResortPolicy
 
     public function viewAny(
         ?User $user
-    ): Response
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->allowed();
     }
 
     public function view(
         ?User  $user,
         Resort $model
-    ): Response
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->allowed();
     }
 
     public function create(
-        ?User $user
-    ): Response
+        User $user
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->denied();
     }
 
     public function update(
-        ?User  $user,
+        User  $user,
         Resort $model
-    ): Response
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->denied();
     }
 
     public function delete(
-        ?User  $user,
+        User  $user,
         Resort $model
-    ): Response
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->denied();
     }
 
     public function restore(
-        ?User  $user,
+        User  $user,
         Resort $model
-    ): Response
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->denied();
     }
 
     public function forceDelete(
-        ?User  $user,
+        User  $user,
         Resort $model
-    ): Response
+    ): bool
     {
-        return $this->authorized();
+        return $this->authorized()->denied();
     }
 }

@@ -15,11 +15,11 @@ class ResortResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $request->name,
-            'description' => $request->description,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'rating' => $request->rating
+            'name' => $this->name,
+            'description' => $this->description,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'rating' => $this->rating
         ];
     }
 }
