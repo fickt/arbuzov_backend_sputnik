@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Orion\Concerns\HandlesAuthorization;
 
 
@@ -13,49 +12,49 @@ class UserPolicy
 
     public function viewAny(
         ?User $user
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->allowed();
     }
 
     public function view(
         ?User $user,
         User $model
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->allowed();
     }
 
     public function create(
         ?User $user
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->allowed();
     }
 
     public function update(
         ?User $user,
         User $model
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->allowed();
     }
 
     public function delete(
-        ?User $user,
+        User $user,
         User $model
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->denied();
     }
 
     public function restore(
         ?User $user,
         User $model
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->denied();
     }
 
     public function forceDelete(
         ?User $user,
         User $model
-    ): Response {
-        return $this->authorized();
+    ): bool {
+        return $this->authorized()->denied();
     }
 
 }
