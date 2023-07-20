@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ResortController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\HasAuthority;
@@ -27,12 +28,12 @@ use Orion\Tests\Fixtures\App\Http\Requests\UserRequest;
 
 
 Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
-  //  Route::post('', [AuthController::class, 'create']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::group(['as' => 'api.'], function () {
     Orion::resource('users', UserController::class);
+    Orion::resource('resorts', ResortController::class);
 });
 
