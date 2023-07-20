@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Resources\LoginResource;
 use App\Http\Resources\LogoutResource;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +21,7 @@ class AuthController extends Controller
      * @return JsonResponse - JWT-token
      * @throws Exception
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request): LoginResource
     {
         if (!$token = auth()->attempt($request->validated())) {
             throw new Exception('Unauthorized', ResponseAlias::HTTP_UNAUTHORIZED);
@@ -44,12 +45,13 @@ class AuthController extends Controller
      * @param $token
      * @return JsonResponse - JWT-token
      */
-    private function createJwtToken($token): JsonResponse
+    private function createJwtToken($token): LoginResource
     {
-        return response()->json([
+        /*return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
+        ]);*/
+        return new LoginResource($token);
     }
 }
