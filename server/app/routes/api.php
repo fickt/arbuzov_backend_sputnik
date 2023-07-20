@@ -3,13 +3,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResortController;
-use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\HasAuthority;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
-use Orion\Tests\Fixtures\App\Http\Requests\UserRequest;
 
 /*
 |--------------------------------------------------------------------------
