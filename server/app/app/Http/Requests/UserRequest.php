@@ -20,4 +20,12 @@ class UserRequest extends Request
             'last_name' => 'string|min:1|max:255|'
         ];
     }
+
+    public function storeRules(): array
+    {
+        return [
+            'email' => 'required|string|email|min:1|max:255|unique:users',
+            'password' => 'required|confirmed|string|min:1|max:255|'
+        ];
+    }
 }

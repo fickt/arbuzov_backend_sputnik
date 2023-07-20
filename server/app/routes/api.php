@@ -27,12 +27,12 @@ use Orion\Tests\Fixtures\App\Http\Requests\UserRequest;
 
 
 Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
-    Route::post('', [AuthController::class, 'create']);
+  //  Route::post('', [AuthController::class, 'create']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::group(['as' => 'api.'], function () {
-    Orion::resource('users', UserController::class)->middleware(HasAuthority::class);
+    Orion::resource('users', UserController::class);//->middleware(HasAuthority::class);
 });
 
