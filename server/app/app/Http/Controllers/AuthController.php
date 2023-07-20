@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
-use App\Http\Resources\loginResource;
 use App\Http\Resources\LogoutResource;
-use App\Http\Resources\UserAuthResource;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 

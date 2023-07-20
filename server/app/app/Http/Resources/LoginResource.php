@@ -14,9 +14,8 @@ class LoginResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        print_r($request->);
         return [
-            'access_token' => $request->token,
+            'access_token' => '',
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ];
