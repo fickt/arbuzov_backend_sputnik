@@ -2,30 +2,35 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RolesEnum;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    private const ROLE_USER_ID = 1;
-    private const ROLE_ADMIN_ID = 2;
 
     /**
      * Создаёт юзера и администратора
      */
     public static function run(): void
     {
-        $admin = User::create([
+        $admin = User::query()->create([
             'email' => 'admin1super@gmail.com',
             'password' => bcrypt('password')
         ]);
-        Role::find(self::ROLE_ADMIN_ID)->users()->save($admin);
+        Role::query()->where('name', '=', RolesEnum::ADMIN)
+            ->first()
+            ->users()
+            ->save($admin);
 
-        $user = User::create([
+        $user = User::query()->create([
             'email' => 'user1super@gmail.com',
             'password' => bcrypt('password')
         ]);
-        Role::find(self::ROLE_USER_ID)->users()->save($user);
+        Role::query()->where('name', '=', RolesEnum::USER)
+            ->first()
+            ->users()
+            ->save($user);
     }
 }

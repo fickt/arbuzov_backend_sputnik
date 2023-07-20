@@ -114,7 +114,6 @@ class User extends Authenticatable implements JWTSubject
                 'sent_at' => Carbon::now()
             ]);
         }
-
     }
 
     private function assignUserRoleToUser(): void
