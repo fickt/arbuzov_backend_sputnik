@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RolesEnum;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -88,6 +90,8 @@ class User extends Authenticatable implements JWTSubject
     {
         self::creating(fn(self $model) => $model->assignUserRoleToUser());
         self::created(fn(self $model) => $model->sendUserCreatedNotificationsToAdmins());
+
+        self::updating(fn(self $model) => $model->isAuthorized());
         parent::boot();
     }
 
@@ -134,5 +138,19 @@ class User extends Authenticatable implements JWTSubject
             ->where('name', '=', RolesEnum::USER)
             ->first();
         $this->role()->associate($userRole);
+    }
+
+    /**
+     * User изменяет только свои данные, либо если role = admin, то пусть меняет кого угодно
+     *
+     * @throws \Exception
+     */
+    private function isAuthorized(): void
+    {
+        $currentUserId = \Request::route('user');
+
+        if (!Auth::id() == $currentUserId || !Auth::user()->role()->first()->name == RolesEnum::ADMIN) {
+            throw new \Exception("Unauthorized", Response::HTTP_UNAUTHORIZED);
+        }
     }
 }

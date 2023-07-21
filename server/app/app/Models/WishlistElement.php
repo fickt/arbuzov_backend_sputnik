@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 
 /**
@@ -26,8 +27,27 @@ class WishlistElement extends Model
 
     public static function boot(): void
     {
-        self::creating(fn(self $model) => $model->checkIfResortExists());
+        self::creating(fn(self $model) => $model->performCreatingChecks());
         parent::boot();
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function performCreatingChecks(): void
+    {
+        $this->checkIfResortExists();
+        $this->checkIfResortInWishlistAlreadyExists();
+    }
+
+    private function checkIfResortInWishlistAlreadyExists(): void
+    {
+        $resort = Auth::user()
+            ->resortWishlist()
+            ->where('resort_id', '=', \Request::get('resort_id'))->first();
+        if ($resort) {
+            throw new \Exception('User has a resort with id:' . \Request::get('resort_id') . ' in wishlist already!');
+        }
     }
 
     private function checkIfResortExists(): void
