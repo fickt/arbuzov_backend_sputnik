@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -72,6 +73,15 @@ class User extends Authenticatable implements JWTSubject
     public function photos(): HasMany
     {
         return $this->hasMany(UserPhoto::class);
+    }
+
+    public function resortWishlist(): BelongsToMany
+    {
+        return $this->belongsToMany(Resort::class,
+            'user_resort_wishlist',
+            'user_id',
+            'resort_id'
+        );
     }
 
     public static function boot(): void

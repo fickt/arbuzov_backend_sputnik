@@ -33,8 +33,8 @@ class WishlistElement extends Model
     private function checkIfResortExists(): void
     {
         $resortId = \Request::get('resort_id');
-        if (!Resort::query()->find($resortId)->exists()) {
-            throw new Exception('Resort with id: ' . $resortId . 'has not been found!');
+        if (!Resort::query()->find($resortId)) {
+            throw new Exception('Resort with id: ' . $resortId . ' has not been found!');
         }
     }
 
