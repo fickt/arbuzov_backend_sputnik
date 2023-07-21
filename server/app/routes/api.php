@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResortController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPhotoController;
+use App\Http\Controllers\UserWishlistController;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
