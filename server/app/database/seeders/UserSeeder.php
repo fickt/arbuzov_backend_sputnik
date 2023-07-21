@@ -15,22 +15,16 @@ class UserSeeder extends Seeder
      */
     public static function run(): void
     {
-        $admin = User::query()->create([
+        User::query()->forceCreateQuietly([
             'email' => 'admin1super@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'role_id' => RolesEnum::ADMIN_ID
         ]);
-        Role::query()->where('name', '=', RolesEnum::ADMIN)
-            ->first()
-            ->users()
-            ->save($admin);
 
-        $user = User::query()->create([
+        User::query()->forceCreateQuietly([
             'email' => 'user1super@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'role_id' => RolesEnum::USER_ID
         ]);
-        Role::query()->where('name', '=', RolesEnum::USER)
-            ->first()
-            ->users()
-            ->save($user);
     }
 }

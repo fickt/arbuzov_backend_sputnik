@@ -17,6 +17,6 @@ class ResortCategorySeeder extends Seeder
      */
     public static function run(): void
     {
-        ResortCategory::factory(self::RESORT_CATEGORY_NUMBER)->create();
+        ResortCategory::factory(self::RESORT_CATEGORY_NUMBER)->createQuietly();
     }
 }
