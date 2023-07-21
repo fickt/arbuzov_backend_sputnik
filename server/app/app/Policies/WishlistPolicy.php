@@ -26,6 +26,7 @@ class WishlistPolicy
     public function create(
         ?User $user
     ): bool {
+        //var_dump(\Request::all('resort_id'));
         return $this->authorized()->allowed();
     }
 

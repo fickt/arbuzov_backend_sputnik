@@ -16,7 +16,6 @@ use Orion\Http\Requests\Request;
 class UserPhotoController extends Controller
 
 {
-
     protected $model = UserPhoto::class;
     protected $request = UserPhotoRequest::class;
     protected $policy = UserPhotoPolicy::class;
