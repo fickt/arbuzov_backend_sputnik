@@ -94,8 +94,7 @@ class User extends Authenticatable implements JWTSubject
         self::updating(fn(self $model) => $model->isAuthorized());
         parent::boot();
     }
-
-
+    
     /**
      * Получить все уведомления user
      *
@@ -149,7 +148,7 @@ class User extends Authenticatable implements JWTSubject
     {
         $currentUserId = \Request::route('user');
 
-        if (!Auth::id() == $currentUserId || !Auth::user()->role()->first()->name == RolesEnum::ADMIN) {
+        if (!(Auth::id() == $currentUserId || Auth::user()->role()->first()->name == RolesEnum::ADMIN)) {
             throw new \Exception("Unauthorized", Response::HTTP_UNAUTHORIZED);
         }
     }
