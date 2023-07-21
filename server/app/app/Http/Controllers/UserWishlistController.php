@@ -16,6 +16,7 @@ class UserWishlistController extends Controller
     protected $request = WishlistRequest::class;
     protected $model = WishlistElement::class;
     protected $policy = WishlistPolicy::class;
+    //protected $resource = WishlistResource::class;
 
 
     /**
@@ -25,8 +26,10 @@ class UserWishlistController extends Controller
      * @param array $requestedRelations
      * @return Builder
      */
-    protected function buildIndexFetchQuery(Request $request, array $requestedRelations): Builder
+     function buildIndexFetchQuery(Request $request, array $requestedRelations): Builder
     {
+       // return Auth::user()->resortWishlist()->get(); TODO хотелось бы здесь просто вот так сделать и дело с концами... 
+
         $query = parent::buildIndexFetchQuery($request, $requestedRelations);
         $query->where('user_id', '=', Auth::id());
         return $query;
