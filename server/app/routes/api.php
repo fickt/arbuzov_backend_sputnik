@@ -4,6 +4,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResortController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPhotoController;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
@@ -29,6 +30,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
 
 Route::group(['as' => 'api.'], function () {
     Orion::resource('users', UserController::class);
+    Orion::hasManyResource('users' ,'photos', UserPhotoController::class);
+
     Orion::resource('resorts', ResortController::class);
 });
 

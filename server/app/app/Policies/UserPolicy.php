@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use Auth;
 use Orion\Concerns\HandlesAuthorization;
 
 

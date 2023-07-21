@@ -4,9 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RolesEnum;
-use App\Events\UserCreatedEvent;
-use App\Events\UserCreatingEvent;
-use App\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
