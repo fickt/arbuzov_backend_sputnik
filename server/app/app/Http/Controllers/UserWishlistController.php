@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WishlistRequest;
-use App\Models\Resort;
 use App\Models\WishlistElement;
 use App\Policies\WishlistPolicy;
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Orion\Http\Controllers\Controller;
 use Orion\Http\Requests\Request;
@@ -31,6 +29,6 @@ class UserWishlistController extends Controller
 
     protected function keyName(): string
     {
-        return '';
+        return 'id';
     }
 }
