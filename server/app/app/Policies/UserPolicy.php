@@ -13,48 +13,55 @@ class UserPolicy
 
     public function viewAny(
         ?User $user
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function view(
         ?User $user,
-        User $model
-    ): bool {
+        User  $model
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function create(
         ?User $user
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function update(
-        ?User $user,
+        User $user,
         User $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function delete(
         User $user,
         User $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->denied();
     }
 
     public function restore(
-        ?User $user,
+        User $user,
         User $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->denied();
     }
 
     public function forceDelete(
-        ?User $user,
+        User $user,
         User $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->denied();
     }
 

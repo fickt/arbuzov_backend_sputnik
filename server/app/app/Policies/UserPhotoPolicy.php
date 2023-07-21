@@ -10,6 +10,7 @@ use Orion\Concerns\HandlesAuthorization;
 class UserPhotoPolicy
 {
     use HandlesAuthorization;
+
     public function viewAny(
         ?User $user
     ): bool
@@ -18,7 +19,7 @@ class UserPhotoPolicy
     }
 
     public function view(
-        ?User  $user,
+        ?User     $user,
         UserPhoto $model
     ): bool
     {
@@ -26,14 +27,14 @@ class UserPhotoPolicy
     }
 
     public function create(
-        ?User $user
+        User $user
     ): bool
     {
         return $this->authorized()->allowed();
     }
 
     public function update(
-        ?User  $user,
+        User      $user,
         UserPhoto $model
     ): bool
     {
@@ -41,7 +42,7 @@ class UserPhotoPolicy
     }
 
     public function delete(
-        ?User  $user,
+        User      $user,
         UserPhoto $model
     ): bool
     {
@@ -49,7 +50,7 @@ class UserPhotoPolicy
     }
 
     public function restore(
-        ?User  $user,
+        User      $user,
         UserPhoto $model
     ): bool
     {
@@ -57,7 +58,7 @@ class UserPhotoPolicy
     }
 
     public function forceDelete(
-        ?User  $user,
+        User      $user,
         UserPhoto $model
     ): bool
     {

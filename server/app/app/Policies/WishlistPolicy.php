@@ -12,49 +12,55 @@ class WishlistPolicy
 
     public function viewAny(
         ?User $user
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function view(
-        ?User $user,
+        ?User           $user,
         WishlistElement $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function create(
-        ?User $user
-    ): bool {
-        //var_dump(\Request::all('resort_id'));
+        User $user
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function update(
-        ?User $user,
+        User            $user,
         WishlistElement $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->allowed();
     }
 
     public function delete(
-        User $user,
+        User            $user,
         WishlistElement $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->denied();
     }
 
     public function restore(
-        ?User $user,
+        User            $user,
         WishlistElement $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->denied();
     }
 
     public function forceDelete(
-        ?User $user,
+        User            $user,
         WishlistElement $model
-    ): bool {
+    ): bool
+    {
         return $this->authorized()->denied();
     }
 }
