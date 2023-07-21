@@ -69,6 +69,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
+    public function photos(): HasMany
+    {
+        return $this->hasMany(UserPhoto::class);
+    }
+
     public static function boot(): void
     {
         self::creating(fn(self $model) => $model->assignUserRoleToUser());

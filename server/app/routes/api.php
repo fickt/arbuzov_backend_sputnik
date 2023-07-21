@@ -30,8 +30,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
 
 Route::group(['as' => 'api.'], function () {
     Orion::resource('users', UserController::class);
-    Orion::hasManyResource('users' ,'photos', UserPhotoController::class);
-
+    Orion::resource('user-photos', UserPhotoController::class);
     Orion::resource('resorts', ResortController::class);
 });
 
