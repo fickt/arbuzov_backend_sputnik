@@ -7,9 +7,7 @@ use App\Http\Resources\UserPhotoResource;
 use App\Models\UserPhoto;
 use App\Policies\UserPhotoPolicy;
 use Auth;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Orion\Concerns\DisableAuthorization;
 use Orion\Http\Controllers\Controller;
 use Orion\Http\Requests\Request;
 

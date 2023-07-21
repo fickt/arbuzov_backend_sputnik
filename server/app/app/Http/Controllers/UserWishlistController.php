@@ -9,7 +9,6 @@ use App\Policies\WishlistPolicy;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Mockery\Exception;
 use Orion\Http\Controllers\Controller;
 use Orion\Http\Requests\Request;
 
@@ -24,11 +23,14 @@ class UserWishlistController extends Controller
         var_dump(Auth::id());
         $entity->fill(array_merge(
                 $attributes,
-                ['user_id' => Auth::id(),
-                'visit_date' => Carbon::now()
-                ]
+                ['user_id' => Auth::id()]
             )
         );
         $entity->save();
+    }
+
+    protected function keyName(): string
+    {
+        return '';
     }
 }
