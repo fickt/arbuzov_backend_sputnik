@@ -32,5 +32,6 @@ Route::group(['as' => 'api.'], function () {
     Orion::resource('users', UserController::class);
     Orion::resource('user-photos', UserPhotoController::class);
     Orion::resource('resorts', ResortController::class);
+    Orion::resource('user-wishlist-resorts', UserWishlistController::class);
 });
 
