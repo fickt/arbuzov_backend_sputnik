@@ -17,10 +17,4 @@ class UserController extends Controller
     protected $policy = UserPolicy::class;
     protected $request = UserRequest::class;
     protected $resource = UserResource::class;
-
-    protected function performStore(Request $request, Model $entity, array $attributes): void
-    {
-        $entity->fill($attributes);
-        $entity->save();
-    }
 }
