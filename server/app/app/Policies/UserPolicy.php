@@ -2,13 +2,9 @@
 
 namespace App\Policies;
 
-use App\Enums\RolesEnum;
 use App\Models\User;
 use App\Policies\Traits\ChecksUserAuthority;
-use Auth;
 use Orion\Concerns\HandlesAuthorization;
-use Request;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class UserPolicy
