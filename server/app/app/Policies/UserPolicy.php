@@ -15,7 +15,10 @@ class UserPolicy
         ?User $user
     ): bool
     {
-        return $this->authorized()->allowed();
+        if($this->isAdminOrSameUser()) {
+            return $this->authorized()->allowed();
+        }
+        return $this->authorized()->denied();
     }
 
     public function view(
