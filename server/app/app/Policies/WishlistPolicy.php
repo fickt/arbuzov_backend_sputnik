@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\WishlistElement;
-use app\Policies\Traits\ChecksUserAuthority;
+use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class WishlistPolicy

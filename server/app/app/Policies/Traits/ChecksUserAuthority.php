@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Policies\Traits;
+namespace App\Policies\Traits;
 
 use App\Enums\RolesEnum;
 use Auth;

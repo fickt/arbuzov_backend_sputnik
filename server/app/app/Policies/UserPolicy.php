@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Enums\RolesEnum;
 use App\Models\User;
-use app\Policies\Traits\ChecksUserAuthority;
+use App\Policies\Traits\ChecksUserAuthority;
 use Auth;
 use Orion\Concerns\HandlesAuthorization;
 use Request;
