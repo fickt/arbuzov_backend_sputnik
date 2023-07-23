@@ -16,7 +16,6 @@ class UserWishlistController extends Controller
     protected $request = WishlistRequest::class;
     protected $model = WishlistElement::class;
     protected $policy = WishlistPolicy::class;
-    //protected $resource = WishlistResource::class;
 
 
     /**
@@ -40,7 +39,7 @@ class UserWishlistController extends Controller
      * @param array $attributes
      * @return void
      */
-    protected function performStore(Request $request, Model $entity, array $attributes): void
+   /* protected function performStore(Request $request, Model $entity, array $attributes): void
     {
         $entity->fill(array_merge(
                 $attributes,
@@ -48,5 +47,5 @@ class UserWishlistController extends Controller
             )
         );
         $entity->save();
-    }
+    }*/
 }

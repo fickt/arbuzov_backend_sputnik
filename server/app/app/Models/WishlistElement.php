@@ -28,8 +28,14 @@ class WishlistElement extends Model
 
     public static function boot(): void
     {
-        self::creating(fn(self $model) => $model->checkIfResortInWishlistAlreadyExists());
+        self::creating(fn(self $model) => $model->performCreatingActions());
         parent::boot();
+    }
+
+    private function performCreatingActions(): void
+    {
+        $this->checkIfResortInWishlistAlreadyExists();
+        $this->putUserId();
     }
 
     /**
@@ -48,5 +54,15 @@ class WishlistElement extends Model
                 Response::HTTP_BAD_REQUEST
             );
         }
+    }
+
+    /**
+     * Заполняет поле user_id айдишником авторизованного пользователя
+     *
+     * @return void
+     */
+    private function putUserId(): void
+    {
+        $this->user_id = Auth::id();
     }
 }

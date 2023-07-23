@@ -24,7 +24,7 @@ use Orion\Facades\Orion;
     return $request->user();
 });*/
 
-Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
