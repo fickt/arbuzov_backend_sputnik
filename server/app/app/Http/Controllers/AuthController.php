@@ -26,7 +26,7 @@ class AuthController extends Controller
             throw new Exception('Unauthorized', ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
-        return $this->createJwtToken($token);
+        return new LoginResource($token);
     }
 
     /**
@@ -38,14 +38,5 @@ class AuthController extends Controller
     {
         auth()->logout();
         return new LogoutResource();
-    }
-
-    /**
-     * @param $token
-     * @return LoginResource - JWT-token
-     */
-    private function createJwtToken($token): LoginResource
-    {
-        return new LoginResource($token);
     }
 }
