@@ -4,10 +4,7 @@ namespace App\Policies;
 
 use App\Models\Resort;
 use App\Models\User;
-use Auth;
-use Illuminate\Auth\Access\Response;
 use Orion\Concerns\HandlesAuthorization;
-use Request;
 
 class ResortPolicy
 {
@@ -25,10 +22,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        if(Auth::id() == Request::get('user')) {
             return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
     }
 
     public function create(

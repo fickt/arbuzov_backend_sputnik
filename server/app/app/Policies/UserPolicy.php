@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Enums\RolesEnum;
 use App\Models\User;
+use app\Policies\Traits\ChecksUserAuthority;
 use Auth;
 use Orion\Concerns\HandlesAuthorization;
 use Request;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
         ?User $user
@@ -26,7 +27,10 @@ class UserPolicy
         User  $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        if($this->isAdminOrSameUser()) {
+            return $this->authorized()->allowed();
+        }
+        return $this->authorized()->denied();
     }
 
     public function create(
@@ -70,16 +74,5 @@ class UserPolicy
     {
         return $this->authorized()->denied();
     }
-
-    private function isAdminOrSameUser(): bool
-    {
-        $currentUserId = Request::route('user');
-
-        if (Auth::id() != $currentUserId || !(Auth::user()->role()->first()->name !== RolesEnum::ADMIN)) {
-            return false;
-        }
-        return true;
-    }
-
 }
 

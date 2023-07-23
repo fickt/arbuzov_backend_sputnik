@@ -4,17 +4,21 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\WishlistElement;
+use app\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class WishlistPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
         ?User $user
     ): bool
     {
-        return $this->authorized()->allowed();
+        if($this->isAdminOrSameUser()) {
+            return $this->authorized()->allowed();
+        }
+        return $this->authorized()->denied();
     }
 
     public function view(
