@@ -17,4 +17,9 @@ class UserController extends Controller
     protected $policy = UserPolicy::class;
     protected $request = UserRequest::class;
     protected $resource = UserResource::class;
+
+    public function alwaysIncludes(): array
+    {
+        return ['photos', 'role'];
+    }
 }
