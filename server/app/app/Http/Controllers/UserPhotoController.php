@@ -18,5 +18,5 @@ class UserPhotoController extends Controller
     protected $request = UserPhotoRequest::class;
     protected $policy = UserPhotoPolicy::class;
     protected $resource = UserPhotoResource::class;
-    
+
 }

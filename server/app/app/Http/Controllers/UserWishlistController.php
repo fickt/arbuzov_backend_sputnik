@@ -26,11 +26,10 @@ class UserWishlistController extends Controller
      * @param array $requestedRelations
      * @return Builder
      */
-     function buildIndexFetchQuery(Request $request, array $requestedRelations): Builder
+    function buildIndexFetchQuery(Request $request, array $requestedRelations): Builder
     {
-       // return Auth::user()->resortWishlist()->get(); TODO хотелось бы конечно здесь просто вот так сделать и дело с концами... Пока недоделано
-
-        return parent::buildIndexFetchQuery($request, $requestedRelations);
+        $query = parent::buildIndexFetchQuery($request, $requestedRelations);
+        return $query->where('user_id', Auth::id());
     }
 
     /**
@@ -50,10 +49,5 @@ class UserWishlistController extends Controller
             )
         );
         $entity->save();
-    }
-
-    protected function keyName(): string
-    {
-        return 'id';
     }
 }
