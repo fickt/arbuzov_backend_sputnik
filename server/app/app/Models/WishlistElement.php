@@ -28,20 +28,14 @@ class WishlistElement extends Model
 
     public static function boot(): void
     {
-        self::creating(fn(self $model) => $model->performCreatingChecks());
+        self::creating(fn(self $model) => $model->checkIfResortInWishlistAlreadyExists());
         parent::boot();
     }
 
     /**
-     * Чекает, добавлял ли user уже resort в wishlist, еще проверяет, есть ли ваще resort c таким id
+     * Чекает, добавлял ли user уже resort в wishlist
      * @throws Exception
      */
-    private function performCreatingChecks(): void
-    {
-        $this->checkIfResortExists();
-        $this->checkIfResortInWishlistAlreadyExists();
-    }
-
     private function checkIfResortInWishlistAlreadyExists(): void
     {
         $resort = Auth::user()
@@ -55,14 +49,4 @@ class WishlistElement extends Model
             );
         }
     }
-
-    private function checkIfResortExists(): void
-    {
-        if (!Resort::query()->find($this->resort_id)) {
-            throw new Exception('Resort with id: ' . $this->resort_id . ' has not been found!',
-                Response::HTTP_NOT_FOUND
-            );
-        }
-    }
-
 }
