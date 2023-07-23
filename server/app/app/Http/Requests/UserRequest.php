@@ -25,7 +25,10 @@ class UserRequest extends Request
     {
         return [
             'email' => 'required|string|email|min:1|max:255|unique:users',
-            'password' => 'required|confirmed|string|min:1|max:255|'
+            'password' => 'required|confirmed|string|min:1|max:255|',
+            'nickname' => 'prohibited',
+            'first_name' => 'prohibited',
+            'last_name' => 'prohibited'
         ];
     }
 }

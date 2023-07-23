@@ -5,9 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LoginResource extends JsonResource
+class ResortResource extends JsonResource
 {
-
     /**
      * Transform the resource into an array.
      *
@@ -16,9 +15,11 @@ class LoginResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'access_token' => $this->resource,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'name' => $this->name,
+            'description' => $this->description,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
+            'rating' => $this->rating
         ];
     }
 }

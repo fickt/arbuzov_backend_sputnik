@@ -2,76 +2,65 @@
 
 namespace App\Policies;
 
+use App\Models\Resort;
 use App\Models\User;
-use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
-
-class UserPolicy
+class ResortPolicy
 {
-    use HandlesAuthorization, ChecksUserAuthority;
+    use HandlesAuthorization;
 
     public function viewAny(
         ?User $user
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
         return $this->authorized()->denied();
     }
 
     public function view(
-        ?User $user,
-        User  $model
+        ?User  $user,
+        Resort $model
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
             return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
     }
 
     public function create(
-        ?User $user
+        User $user
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->authorized()->denied();
     }
 
     public function update(
-        User $user,
-        User $model
+        User  $user,
+        Resort $model
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
         return $this->authorized()->denied();
     }
 
     public function delete(
-        User $user,
-        User $model
+        User  $user,
+        Resort $model
     ): bool
     {
         return $this->authorized()->denied();
     }
 
     public function restore(
-        User $user,
-        User $model
+        User  $user,
+        Resort $model
     ): bool
     {
         return $this->authorized()->denied();
     }
 
     public function forceDelete(
-        User $user,
-        User $model
+        User  $user,
+        Resort $model
     ): bool
     {
         return $this->authorized()->denied();
     }
 }
-

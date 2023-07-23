@@ -4,17 +4,17 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RolesEnum;
-use App\Events\UserCreatedEvent;
-use App\Events\UserCreatingEvent;
-use App\Listeners\UserCreatedEventListeners\AssignUserRoleToUserListener;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -72,13 +72,26 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
+    public function photos(): HasMany
+    {
+        return $this->hasMany(UserPhoto::class);
+    }
+
+    public function resortWishlist(): BelongsToMany
+    {
+        return $this->belongsToMany(Resort::class,
+            'user_resort_wishlist',
+            'user_id',
+            'resort_id'
+        );
+    }
+
     public static function boot(): void
     {
         self::creating(fn(self $model) => $model->assignUserRoleToUser());
         self::created(fn(self $model) => $model->sendUserCreatedNotificationsToAdmins());
         parent::boot();
     }
-
 
     /**
      * Получить все уведомления user

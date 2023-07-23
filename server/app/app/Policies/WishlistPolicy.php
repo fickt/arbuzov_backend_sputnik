@@ -3,11 +3,11 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\WishlistElement;
 use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
-
-class UserPolicy
+class WishlistPolicy
 {
     use HandlesAuthorization, ChecksUserAuthority;
 
@@ -22,56 +22,49 @@ class UserPolicy
     }
 
     public function view(
-        ?User $user,
-        User  $model
+        ?User           $user,
+        WishlistElement $model
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function create(
-        ?User $user
+        User $user
     ): bool
     {
         return $this->authorized()->allowed();
     }
 
     public function update(
-        User $user,
-        User $model
+        User            $user,
+        WishlistElement $model
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function delete(
-        User $user,
-        User $model
+        User            $user,
+        WishlistElement $model
     ): bool
     {
         return $this->authorized()->denied();
     }
 
     public function restore(
-        User $user,
-        User $model
+        User            $user,
+        WishlistElement $model
     ): bool
     {
         return $this->authorized()->denied();
     }
 
     public function forceDelete(
-        User $user,
-        User $model
+        User            $user,
+        WishlistElement $model
     ): bool
     {
         return $this->authorized()->denied();
     }
 }
-

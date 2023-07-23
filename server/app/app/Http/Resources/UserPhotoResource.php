@@ -5,9 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LoginResource extends JsonResource
+class UserPhotoResource extends JsonResource
 {
-
     /**
      * Transform the resource into an array.
      *
@@ -16,9 +15,8 @@ class LoginResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'access_token' => $this->resource,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'user_id' => $this->user_id,
+            'photo' => $this->photo
         ];
     }
 }

@@ -18,7 +18,7 @@ class UserAuthResource extends JsonResource
         return [
             'id' => $this->id,
             'email' => $this->email,
-            'role' => $this->role()->first()->name
+            'role' => $this->whenLoaded('role')
         ];
     }
 

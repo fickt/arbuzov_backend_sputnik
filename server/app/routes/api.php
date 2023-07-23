@@ -2,13 +2,12 @@
 
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\ResortController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\HasAuthority;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserPhotoController;
+use App\Http\Controllers\UserWishlistController;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
-use Orion\Tests\Fixtures\App\Http\Requests\UserRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +24,15 @@ use Orion\Tests\Fixtures\App\Http\Requests\UserRequest;
     return $request->user();
 });*/
 
-
-Route::group(['middleware' => 'api', 'prefix' => 'users/auth'], function () {
-  //  Route::post('', [AuthController::class, 'create']);
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::group(['as' => 'api.'], function () {
     Orion::resource('users', UserController::class);
+    Orion::resource('user-photos', UserPhotoController::class);
+    Orion::resource('resorts', ResortController::class);
+    Orion::resource('user-wishlist-resorts', UserWishlistController::class);
 });
 
