@@ -40,7 +40,7 @@ class UserWishlistController extends Controller
      * @param array $attributes
      * @return void
      */
-    protected function performStore(Request $request, Model $entity, array $attributes): void
+   /* protected function performStore(Request $request, Model $entity, array $attributes): void
     {
         var_dump(Auth::id());
         $entity->fill(array_merge(
@@ -49,5 +49,5 @@ class UserWishlistController extends Controller
             )
         );
         $entity->save();
-    }
+    }*/
 }
