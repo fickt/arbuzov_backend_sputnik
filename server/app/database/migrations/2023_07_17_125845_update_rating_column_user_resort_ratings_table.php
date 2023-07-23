@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('resort_user_ratings_table', function ($table) {
+        Schema::table('resort_user_ratings', function ($table) {
             $table->integer('rating')->default(0)->change();
         });
     }

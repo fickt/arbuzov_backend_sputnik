@@ -19,13 +19,4 @@ class UserPhotoController extends Controller
     protected $policy = UserPhotoPolicy::class;
     protected $resource = UserPhotoResource::class;
 
-    protected function performStore(Request $request, Model $entity, array $attributes): void
-    {
-            $entity->fill(array_merge(
-                    $attributes,
-                    ['user_id' => Auth::id()]
-                )
-            );
-        $entity->save();
-    }
 }

@@ -3,19 +3,22 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Auth;
+use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 
 class UserPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
         ?User $user
     ): bool
     {
-        return $this->authorized()->allowed();
+        if($this->isAdminOrSameUser()) {
+            return $this->authorized()->allowed();
+        }
+        return $this->authorized()->denied();
     }
 
     public function view(
@@ -23,7 +26,10 @@ class UserPolicy
         User  $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        if($this->isAdminOrSameUser()) {
+            return $this->authorized()->allowed();
+        }
+        return $this->authorized()->denied();
     }
 
     public function create(
@@ -38,7 +44,10 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        if($this->isAdminOrSameUser()) {
+            return $this->authorized()->allowed();
+        }
+        return $this->authorized()->denied();
     }
 
     public function delete(
@@ -64,6 +73,5 @@ class UserPolicy
     {
         return $this->authorized()->denied();
     }
-
 }
 

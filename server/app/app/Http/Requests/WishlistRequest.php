@@ -15,7 +15,7 @@ class WishlistRequest extends Request
     public function storeRules(): array
     {
         return [
-            'resort_id' => 'integer|required|min:1|max:255'
+            'resort_id' => 'required|integer|exists:resorts,id|min:1'
         ];
     }
 }

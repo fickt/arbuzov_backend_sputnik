@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Resort;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Orion\Concerns\HandlesAuthorization;
 
 class ResortPolicy
@@ -15,7 +14,7 @@ class ResortPolicy
         ?User $user
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->authorized()->denied();
     }
 
     public function view(
@@ -23,7 +22,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->allowed();
+            return $this->authorized()->allowed();
     }
 
     public function create(

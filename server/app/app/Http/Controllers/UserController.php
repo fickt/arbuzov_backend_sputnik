@@ -18,9 +18,8 @@ class UserController extends Controller
     protected $request = UserRequest::class;
     protected $resource = UserResource::class;
 
-    protected function performStore(Request $request, Model $entity, array $attributes): void
+    public function alwaysIncludes(): array
     {
-        $entity->fill($attributes);
-        $entity->save();
+        return ['photos', 'role'];
     }
 }

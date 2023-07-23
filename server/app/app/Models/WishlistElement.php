@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @mixin Builder
@@ -27,38 +28,41 @@ class WishlistElement extends Model
 
     public static function boot(): void
     {
-        self::creating(fn(self $model) => $model->performCreatingChecks());
+        self::creating(fn(self $model) => $model->performCreatingActions());
         parent::boot();
     }
 
-    /**
-     * Чекает, добавлял ли user уже resort в wishlist, еще проверяет, есть ли ваще resort c таким id
-     * @throws \Exception
-     */
-    private function performCreatingChecks(): void
+    private function performCreatingActions(): void
     {
-        $this->checkIfResortExists();
         $this->checkIfResortInWishlistAlreadyExists();
+        $this->putUserId();
     }
 
+    /**
+     * Чекает, добавлял ли user уже resort в wishlist
+     * @throws Exception
+     */
     private function checkIfResortInWishlistAlreadyExists(): void
     {
         $resort = Auth::user()
             ->resortWishlist()
-            ->where('resort_id', '=', \Request::get('resort_id'))->first();
+            ->where('resort_id', '=', $this->resort_id)
+            ->exists();
+
         if ($resort) {
-            throw new \Exception('User has a resort with id:' . \Request::get('resort_id') . ' in wishlist already!',
-                ResponseAlias::HTTP_BAD_REQUEST
+            throw new Exception('User has a resort with id:' . $this->resort_id . ' in wishlist already!',
+                Response::HTTP_BAD_REQUEST
             );
         }
     }
 
-    private function checkIfResortExists(): void
+    /**
+     * Заполняет поле user_id айдишником авторизованного пользователя
+     *
+     * @return void
+     */
+    private function putUserId(): void
     {
-        $resortId = \Request::get('resort_id');
-        if (!Resort::query()->find($resortId)) {
-            throw new \Exception('Resort with id: ' . $resortId . ' has not been found!', ResponseAlias::HTTP_NOT_FOUND);
-        }
+        $this->user_id = Auth::id();
     }
-
 }
