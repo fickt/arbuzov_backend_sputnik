@@ -30,22 +30,4 @@ class UserWishlistController extends Controller
         $query = parent::buildIndexFetchQuery($request, $requestedRelations);
         return $query->where('user_id', Auth::id());
     }
-
-    /**
-     * Cохраняем WishListElement для Wishlist, в котором указаны user_id, resort_id, visit_date,
-     *
-     * @param Request $request
-     * @param Model $entity
-     * @param array $attributes
-     * @return void
-     */
-   /* protected function performStore(Request $request, Model $entity, array $attributes): void
-    {
-        $entity->fill(array_merge(
-                $attributes,
-                ['user_id' => Auth::id()]
-            )
-        );
-        $entity->save();
-    }*/
 }
