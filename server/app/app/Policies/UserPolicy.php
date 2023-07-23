@@ -6,6 +6,7 @@ use App\Enums\RolesEnum;
 use App\Models\User;
 use Auth;
 use Orion\Concerns\HandlesAuthorization;
+use Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -43,7 +44,7 @@ class UserPolicy
         if($this->isAdminOrSameUser()) {
             return $this->authorized()->allowed();
         }
-        return $this->authorized()->allowed();
+        return $this->authorized()->denied();
     }
 
     public function delete(
@@ -72,10 +73,10 @@ class UserPolicy
 
     private function isAdminOrSameUser(): bool
     {
-        $currentUserId = \Request::route('user');
+        $currentUserId = Request::route('user');
 
         if (Auth::id() != $currentUserId || !(Auth::user()->role()->first()->name !== RolesEnum::ADMIN)) {
-            throw new \Exception("Unauthorized", Response::HTTP_UNAUTHORIZED);
+            return false;
         }
         return true;
     }
