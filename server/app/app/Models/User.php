@@ -90,8 +90,6 @@ class User extends Authenticatable implements JWTSubject
     {
         self::creating(fn(self $model) => $model->assignUserRoleToUser());
         self::created(fn(self $model) => $model->sendUserCreatedNotificationsToAdmins());
-
-       // self::updating(fn(self $model) => $model->isAuthorized());
         parent::boot();
     }
 
@@ -138,18 +136,4 @@ class User extends Authenticatable implements JWTSubject
             ->first();
         $this->role()->associate($userRole);
     }
-
-    /**
-     * User изменяет только свои данные, либо если role = admin, то пусть меняет кого угодно
-     *
-     * @throws \Exception
-     */
-   /* private function isAuthorized(): void
-    {
-        $currentUserId = \Request::route('user');
-
-        if (!(Auth::id() == $currentUserId || Auth::user()->role()->first()->name == RolesEnum::ADMIN)) {
-            throw new \Exception("Unauthorized", Response::HTTP_UNAUTHORIZED);
-        }
-    }*/
 }
