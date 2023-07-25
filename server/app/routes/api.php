@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ResortRatingController;
 use App\Http\Controllers\ResortController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPhotoController;
@@ -34,5 +35,6 @@ Route::group(['as' => 'api.'], function () {
     Orion::resource('user-photos', UserPhotoController::class);
     Orion::resource('resorts', ResortController::class);
     Orion::resource('user-wishlist-resorts', UserWishlistController::class);
+    Orion::resource('resort-ratings', ResortRatingController::class);
 });
 
