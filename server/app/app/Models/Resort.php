@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @mixin Builder
@@ -39,6 +40,11 @@ class Resort extends Model
             'resort_id',
             'category_id'
         );
+    }
+
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(ResortRating::class, 'resort_id', 'id');
     }
 
     protected static function newFactory(): ResortFactory

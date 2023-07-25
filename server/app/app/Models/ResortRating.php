@@ -5,6 +5,7 @@ namespace App\Models;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResortRating extends Model
@@ -26,27 +27,57 @@ class ResortRating extends Model
     public static function boot(): void
     {
         self::creating(fn(self $model) => $model->performCreatingActions());
-        //  self::created(fn(self $model) => $model->sendUserCreatedNotificationsToAdmins());
+        self::created(fn(self $model) => $model->performCreatedActions());
         parent::boot();
     }
 
-    private function performCreatingActions()
+    private function performCreatedActions()
     {
-     //   $this->checkResortExists();
-      //  $this->checkIfUserAlreadyHasRating();
+        $this->recalculateResortRating();
     }
 
-/*    private function checkResortExists(): void
+    private function performCreatingActions(): void
     {
-        $resort = Resort::query()->find($this->resort_id)->exists;
-        if (!$resort) {
-            throw new Exception('Resort with id: ' + $this->resort_id + 'has not been found!',
-                Response::HTTP_NOT_FOUND);
+        $this->checkIfUserAlreadyHasRatedResort();
+        $this->assignCurrentUserIdToRating();
+    }
+
+
+    /**
+     * @throws Exception
+     */
+    private function checkIfUserAlreadyHasRatedResort(): void
+    {
+        $resort = ResortRating::query()->where(
+            'resort_id', '=', $this->resort_id, 'and',
+            'user_id', '=', Auth::id())
+            ->exists();
+        if ($resort) {
+            throw new Exception('User has already rated Resort with id: ' . $this->resort_id,
+                Response::HTTP_BAD_REQUEST);
         }
     }
 
-    private function checkIfUserAlreadyHasRating()
-    {
 
-    }*/
+    /**
+     * Пересчитывает Resort rating с учётом новой оценки от User
+     *
+     * @return void
+     */
+    private function recalculateResortRating()
+    {
+        $rating = ResortRating::query()
+            ->where('resort_id', '=', $this->resort_id)
+            ->avg('rating');
+
+        $resort = Resort::query()->find($this->resort_id)->get();
+
+        $resort->rating = $rating;
+        $resort->save();
+    }
+
+    private function assignCurrentUserIdToRating(): void
+    {
+        $this->user_id = Auth::id();
+    }
 }
