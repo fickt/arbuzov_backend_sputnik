@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\ResortRating;
 use Orion\Http\Controllers\Controller;
 
 class ResortRatingController extends Controller
 {
-    //
+    protected $model = ResortRating::class;
+    protected $request = ResortRatingRequest::class;
 }
