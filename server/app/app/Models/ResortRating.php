@@ -13,7 +13,7 @@ class ResortRating extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $table = 'user_resort_rating';
+    protected $table = 'user_resort_ratings';
     protected $guarded = [
         'user_id'
     ];
