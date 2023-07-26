@@ -45,7 +45,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function restore(
@@ -61,6 +61,6 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 }

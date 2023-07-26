@@ -79,7 +79,8 @@ class User extends Authenticatable implements JWTSubject
 
     public function resortWishlist(): BelongsToMany
     {
-        return $this->belongsToMany(Resort::class,
+        return $this->belongsToMany(
+            Resort::class,
             'user_resort_wishlist',
             'user_id',
             'resort_id'
