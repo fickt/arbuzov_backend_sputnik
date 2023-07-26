@@ -56,6 +56,11 @@ class Resort extends Model
         );
     }
 
+    public function photos(): HasMany
+    {
+        return $this->hasMany(ResortPhoto::class);
+    }
+
     public function ratings(): HasMany
     {
         return $this->hasMany(ResortRating::class, 'resort_id', 'id');
@@ -70,7 +75,7 @@ class Resort extends Model
     /**
      *  Отправляет Notifications всем Users у которых данный Resort был в Wishlist
      *
-     *  @return void
+     * @return void
      */
     private function sendNotificationToUserResortIsDeleted(): void
     {

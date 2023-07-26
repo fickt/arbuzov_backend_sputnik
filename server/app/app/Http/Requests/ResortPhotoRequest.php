@@ -16,7 +16,7 @@ class ResortPhotoRequest extends Request
     {
         return [
             'resort_id' => 'required|integer|exists:resorts,id',
-            'photo' =>'required|string|min:1|max:255'
+            'photo' => 'required|string|min:1|max:255'
         ];
     }
 }
