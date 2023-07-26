@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ResortPhotoController;
 use App\Http\Controllers\ResortRatingController;
 use App\Http\Controllers\ResortController;
 use App\Http\Controllers\UserController;
