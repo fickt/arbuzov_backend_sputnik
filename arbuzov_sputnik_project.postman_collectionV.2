@@ -279,6 +279,48 @@
 			"response": []
 		},
 		{
+			"name": "Add photo to resort with id 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resort_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"value": "url/resort/photo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/resort-photos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"resort-photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add resort to wishlist",
 			"event": [
 				{
@@ -286,7 +328,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -334,6 +376,33 @@
 			"response": []
 		},
 		{
+			"name": "Get wishlist of user with id 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/user-wishlist-resorts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user-wishlist-resorts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Try edit another user and get 401 unauthorized",
 			"event": [
 				{
@@ -368,6 +437,278 @@
 					"path": [
 						"users",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate Resort with id 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resort_id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "comment",
+							"value": "This place is soo fucking dope, love it, digga!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/resort-ratings",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"resort-ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/auth/logout",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login as admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin1super@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/auth/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Resort with id: 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/resorts/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"resorts",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all recommendations of user with id 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/recommendations",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"recommendations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin blocks user with id 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user-blocks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user-blocks"
 					]
 				}
 			},
