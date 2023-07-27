@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,6 +26,11 @@ class WishlistElement extends Model
         'resort_id',
         'visit_date'
     ];
+
+    public function resort(): BelongsTo
+    {
+        return $this->belongsTo(Resort::class);
+    }
 
     public static function boot(): void
     {
@@ -64,9 +70,10 @@ class WishlistElement extends Model
 
     private function addRecommendationsToUser(): void
     {
+        $country_id = $this->resort()->first()->country_id;
 
-        $resorts = Resort::query()->whereHas('countries', function ($q) {
-            $q->where('id', '=', $this->country_id);
+        $resorts = Resort::query()->whereHas('country', function ($q) use ($country_id) {
+            $q->where('id', '=', $country_id);
         })->get();
 
         foreach ($resorts as $resort) {
