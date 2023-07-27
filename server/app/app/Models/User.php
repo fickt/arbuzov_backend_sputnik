@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -77,9 +76,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(UserPhoto::class);
     }
 
+    /**
+     * Блокирует/разблокирует User
+     *
+     * @return void
+     */
     public function block(): void
     {
-        $this->is_blocked = !$this->is_blocked;
+        $this->is_blocked = !($this->is_blocked);
         if ($this->is_blocked) {
             Notification::query()->create([
                 'title' => 'Your account has been blocked!',
