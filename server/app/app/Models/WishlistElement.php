@@ -70,13 +70,14 @@ class WishlistElement extends Model
 
     private function addRecommendationsToUser(): void
     {
-        $country_id = $this->resort()->first()->country_id;
+        $resort = $this->resort()->first();
 
-        $resorts = Resort::query()->whereHas('country', function ($q) use ($country_id) {
-            $q->where('id', '=', $country_id);
+        $resorts = Resort::query()->whereHas('country', function ($q) use ($resort) {
+            $q->where('id', '=', $resort->country_id);
         })->get();
 
         foreach ($resorts as $resort) {
+            var_dump(Auth::id());
             ResortRecommendation::query()->create(
                 [
                     'user_id' => Auth::id(),

@@ -15,6 +15,7 @@ class ResortRecommendation extends Model
     public $timestamps = false;
 
     public $fillable = [
+        'user_id',
         'resort_id'
     ];
 
