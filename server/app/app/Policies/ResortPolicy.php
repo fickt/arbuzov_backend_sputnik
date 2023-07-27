@@ -23,7 +23,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-            return $this->authorized()->allowed();
+        return $this->authorized()->allowed();
     }
 
     public function create(
@@ -36,7 +36,7 @@ class ResortPolicy
     }
 
     public function update(
-        User  $user,
+        User   $user,
         Resort $model
     ): bool
     {
@@ -46,7 +46,7 @@ class ResortPolicy
     }
 
     public function delete(
-        User  $user,
+        User   $user,
         Resort $model
     ): bool
     {
@@ -56,7 +56,7 @@ class ResortPolicy
     }
 
     public function restore(
-        User  $user,
+        User   $user,
         Resort $model
     ): bool
     {
@@ -66,7 +66,7 @@ class ResortPolicy
     }
 
     public function forceDelete(
-        User  $user,
+        User   $user,
         Resort $model
     ): bool
     {
