@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ResortFactory extends Factory
 {
+    private const FROM_COUNTRY_ID = 1;
+    private const TO_COUNTRY_ID = 2;
     /**
      * Define the model's default state.
      *
@@ -20,7 +22,8 @@ class ResortFactory extends Factory
             'name' => fake()->company(),
             'description' => fake()->text(100),
             'latitude' => fake()->latitude(),
-            'longitude' => fake()->longitude()
+            'longitude' => fake()->longitude(),
+            'country_id' => rand(self::FROM_COUNTRY_ID, self::TO_COUNTRY_ID)
         ];
     }
 }
