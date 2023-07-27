@@ -15,7 +15,7 @@ class ResortRecommendationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'resorts' => ResortResource::collection($this->whenLoaded('resort'))
+            'resort' => ResortResource::make($this->whenLoaded('resort'))
         ];
     }
 }
