@@ -30,4 +30,9 @@ class UserWishlistController extends Controller
         $query = parent::buildIndexFetchQuery($request, $requestedRelations);
         return $query->where('user_id', Auth::id());
     }
+
+    public function alwaysIncludes(): array
+    {
+        return ['resort'];
+    }
 }
