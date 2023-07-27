@@ -46,9 +46,8 @@ class WishlistElement extends Model
     {
         $resort = Auth::user()
             ->resortWishlist()
-            ->get();
-           // ->where('resort_id', '=', $this->resort_id)
-         //   ->exists();
+            ->where('resort_id', '=', $this->resort_id)
+            ->exists();
 
         if ($resort) {
             throw new Exception('User has a resort with id:' . $this->resort_id . ' in wishlist already!',
