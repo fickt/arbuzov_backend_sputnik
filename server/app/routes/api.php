@@ -6,6 +6,7 @@ use App\Http\Controllers\ResortPhotoController;
 use App\Http\Controllers\ResortRatingController;
 use App\Http\Controllers\ResortController;
 use App\Http\Controllers\ResortRecommendationController;
+use App\Http\Controllers\UserBlockController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPhotoController;
 use App\Http\Controllers\UserWishlistController;
