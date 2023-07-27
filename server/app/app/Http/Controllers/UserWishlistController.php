@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WishlistRequest;
+use App\Http\Resources\WishlistResource;
 use App\Models\WishlistElement;
 use App\Policies\WishlistPolicy;
 use Auth;
@@ -16,6 +17,7 @@ class UserWishlistController extends Controller
     protected $request = WishlistRequest::class;
     protected $model = WishlistElement::class;
     protected $policy = WishlistPolicy::class;
+    protected $resource = WishlistResource::class;
 
 
     /**

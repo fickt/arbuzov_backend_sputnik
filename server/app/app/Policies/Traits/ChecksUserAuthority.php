@@ -3,7 +3,8 @@
 namespace App\Policies\Traits;
 
 use App\Enums\RolesEnum;
-use Auth;
+
+use Illuminate\Support\Facades\Auth;
 use Request;
 
 trait ChecksUserAuthority

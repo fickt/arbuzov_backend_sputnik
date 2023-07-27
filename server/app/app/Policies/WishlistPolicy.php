@@ -15,10 +15,10 @@ class WishlistPolicy
         ?User $user
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
+      /*  if($this->isAdminOrSameUser()) {
             return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+        }*/
+        return $this->authorized()->allowed();
     }
 
     public function view(
