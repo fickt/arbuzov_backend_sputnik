@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserBlockRequest;
 use App\Models\User;
+use App\Policies\UserBlockPolicy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orion\Http\Controllers\Controller;
@@ -13,6 +14,7 @@ class UserBlockController extends Controller
 {
     protected $request = UserBlockRequest::class;
     protected $model = User::class;
+    protected $policy = UserBlockPolicy::class;
 
     protected function runStoreFetchQuery(Request $request, Builder $query, $key): Model
     {
