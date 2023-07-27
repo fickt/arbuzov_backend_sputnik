@@ -29,7 +29,13 @@ class WishlistElement extends Model
     public static function boot(): void
     {
         self::creating(fn(self $model) => $model->performCreatingActions());
+        self::created(fn(self $model) => $model->performCreatedActions());
         parent::boot();
+    }
+
+    private function performCreatedActions(): void
+    {
+        $this->addRecommendationsToUser();
     }
 
     private function performCreatingActions(): void
@@ -52,6 +58,23 @@ class WishlistElement extends Model
         if ($resort) {
             throw new Exception('User has a resort with id:' . $this->resort_id . ' in wishlist already!',
                 Response::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
+    private function addRecommendationsToUser(): void
+    {
+
+        $resorts = Resort::query()->whereHas('countries', function ($q) {
+            $q->where('id', '=', $this->country_id);
+        })->get();
+
+        foreach ($resorts as $resort) {
+            ResortRecommendation::query()->create(
+                [
+                    'user_id' => Auth::id(),
+                    'resort_id' => $resort->id
+                ]
             );
         }
     }
