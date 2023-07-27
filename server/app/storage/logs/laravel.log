@@ -9947,3 +9947,11 @@ DETAIL:  Ошибочная строка содержит (2, null, random/photo
 #46 C:\\Users\\admin\\Desktop\\sputnik\\task1\\arbuzov_backend_sputnik\\server\\app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
 #47 {main}
 "} 
+[2023-07-27 11:13:51] production.ERROR: Command "userblockcontroller" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"userblockcontroller\" is not defined. at C:\\Users\\admin\\Desktop\\sputnik\\task1\\arbuzov_backend_sputnik\\server\\app\\vendor\\symfony\\console\\Application.php:725)
+[stacktrace]
+#0 C:\\Users\\admin\\Desktop\\sputnik\\task1\\arbuzov_backend_sputnik\\server\\app\\vendor\\symfony\\console\\Application.php(262): Symfony\\Component\\Console\\Application->find()
+#1 C:\\Users\\admin\\Desktop\\sputnik\\task1\\arbuzov_backend_sputnik\\server\\app\\vendor\\symfony\\console\\Application.php(174): Symfony\\Component\\Console\\Application->doRun()
+#2 C:\\Users\\admin\\Desktop\\sputnik\\task1\\arbuzov_backend_sputnik\\server\\app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run()
+#3 C:\\Users\\admin\\Desktop\\sputnik\\task1\\arbuzov_backend_sputnik\\server\\app\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#4 {main}
+"} 
