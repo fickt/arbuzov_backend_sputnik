@@ -30,10 +30,9 @@ class UserBlockPolicy
         User $user
     ): bool
     {
-        if($this->isAdmin()) {
-            return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function update(

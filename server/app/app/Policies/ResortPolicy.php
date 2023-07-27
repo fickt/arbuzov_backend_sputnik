@@ -4,17 +4,18 @@ namespace App\Policies;
 
 use App\Models\Resort;
 use App\Models\User;
+use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class ResortPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
         ?User $user
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function view(
@@ -29,7 +30,9 @@ class ResortPolicy
         User $user
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function update(
@@ -37,7 +40,9 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function delete(
@@ -45,7 +50,9 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function restore(
@@ -53,7 +60,9 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function forceDelete(
@@ -61,6 +70,8 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 }

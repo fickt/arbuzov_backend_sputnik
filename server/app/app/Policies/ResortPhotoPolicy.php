@@ -5,11 +5,12 @@ namespace App\Policies;
 use App\Models\ResortPhoto;
 use App\Models\User;
 use App\Models\UserPhoto;
+use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class ResortPhotoPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
         ?User $user
@@ -30,7 +31,9 @@ class ResortPhotoPolicy
         User $user
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function update(
@@ -38,7 +41,9 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function delete(
@@ -46,7 +51,9 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function restore(
@@ -54,7 +61,9 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function forceDelete(
@@ -62,6 +71,8 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 }

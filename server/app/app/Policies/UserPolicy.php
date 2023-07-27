@@ -55,7 +55,9 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function restore(
@@ -63,7 +65,9 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 
     public function forceDelete(
@@ -71,7 +75,9 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->authorized()->denied();
+        return $this->isAdmin() ?
+            $this->authorized()->allowed() :
+            $this->authorized()->denied();
     }
 }
 
