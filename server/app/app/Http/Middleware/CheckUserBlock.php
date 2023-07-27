@@ -17,9 +17,8 @@ class CheckUserBlock
      */
     public function handle(Request $request, Closure $next): Response
     {
-        var_dump(Auth::user()->is_blocked);
         return Auth::user()->is_blocked
-            ? throw new Exception('Your account has been suspended!')
+            ? throw new Exception('Your account has been suspended!', Response::HTTP_FORBIDDEN)
             : $next($request);
     }
 }
