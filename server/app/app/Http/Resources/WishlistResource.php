@@ -14,6 +14,8 @@ class WishlistResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'resort' => ResortResource::make($this->whenLoaded('resort'))
+        ];
     }
 }
