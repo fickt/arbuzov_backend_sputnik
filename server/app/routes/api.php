@@ -11,6 +11,7 @@ use App\Http\Controllers\User\UserBlockController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserPhotoController;
 use App\Http\Controllers\User\UserWishlistController;
+use App\Http\Middleware\CheckUserBlock;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
@@ -32,7 +33,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::group(['as' => 'api.'], function () {
+Route::group(['as' => 'api.', 'middleware' => CheckUserBlock::class], function () {
     /* Users */
     Orion::resource('users', UserController::class);
     Orion::resource('user-photos', UserPhotoController::class);
@@ -46,5 +47,6 @@ Route::group(['as' => 'api.'], function () {
     Orion::resource('recommendations', ResortRecommendationController::class);
 
     Orion::resource('notifications', NotificationController::class);
+
 });
 
