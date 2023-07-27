@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resort;
 
-use App\Http\Requests\ResortRatingRequest;
+use App\Http\Requests\Resort\ResortRatingRequest;
 use App\Models\ResortRating;
 use App\Policies\ResortRatingPolicy;
 use Orion\Http\Controllers\Controller;

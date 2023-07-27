@@ -12,21 +12,21 @@ class WishlistPolicy
     use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
-        ?User $user
+        User $user
     ): bool
     {
-      /*  if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }*/
+
         return $this->authorized()->allowed();
     }
 
     public function view(
-        ?User           $user,
+        User            $user,
         WishlistElement $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function create(

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Wishlist;
 
+use App\Http\Resources\Resort\ResortResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ResortRecommendationResource extends JsonResource
+class WishlistResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

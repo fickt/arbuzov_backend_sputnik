@@ -12,14 +12,14 @@ class UserBlockPolicy
     use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
-        ?User $user
+        User $user
     ): bool
     {
         return $this->authorized()->denied();
     }
 
     public function view(
-        ?User $user,
+        User $user,
         User  $model
     ): bool
     {
@@ -30,9 +30,9 @@ class UserBlockPolicy
         User $user
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function update(

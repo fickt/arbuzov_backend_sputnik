@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Wishlist;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Orion\Http\Requests\Request;
 
-class UserPhotoRequest extends Request
-{
 
+class WishlistRequest extends Request
+{
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,7 +15,7 @@ class UserPhotoRequest extends Request
     public function storeRules(): array
     {
         return [
-            'photo' => 'required|string|min:1|max:255'
+            'resort_id' => 'required|integer|exists:resorts,id|min:1'
         ];
     }
 }

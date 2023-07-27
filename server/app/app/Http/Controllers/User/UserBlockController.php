@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers\User;
 
-use App\Http\Requests\UserBlockRequest;
+use App\Http\Requests\User\UserBlockRequest;
 use App\Models\User;
 use App\Policies\UserBlockPolicy;
 use Illuminate\Database\Eloquent\Builder;

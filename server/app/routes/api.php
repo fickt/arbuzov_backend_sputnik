@@ -1,15 +1,16 @@
 <?php
 
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ResortPhotoController;
-use App\Http\Controllers\ResortRatingController;
-use App\Http\Controllers\ResortController;
-use App\Http\Controllers\ResortRecommendationController;
-use App\Http\Controllers\UserBlockController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserPhotoController;
-use App\Http\Controllers\UserWishlistController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Resort\ResortController;
+use App\Http\Controllers\Resort\ResortPhotoController;
+use App\Http\Controllers\Resort\ResortRatingController;
+use App\Http\Controllers\Resort\ResortRecommendationController;
+use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\UserBlockController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserPhotoController;
+use App\Http\Controllers\User\UserWishlistController;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
@@ -24,23 +25,26 @@ use Orion\Facades\Orion;
 |
 */
 
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
 
+/* Authorization */
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::group(['as' => 'api.'], function () {
+    /* Users */
     Orion::resource('users', UserController::class);
     Orion::resource('user-photos', UserPhotoController::class);
-    Orion::resource('resorts', ResortController::class);
+    Orion::resource('user-blocks', UserBlockController::class);
     Orion::resource('user-wishlist-resorts', UserWishlistController::class);
+    Orion::resource('resorts', ResortController::class);
+
+    /* Resorts */
     Orion::resource('resort-ratings', ResortRatingController::class);
     Orion::resource('resort-photos', ResortPhotoController::class);
     Orion::resource('recommendations', ResortRecommendationController::class);
-    Orion::resource('user-blocks', UserBlockController::class);
+
+    Orion::resource('notifications', NotificationController::class);
 });
 

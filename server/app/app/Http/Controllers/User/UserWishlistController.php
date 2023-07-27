@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers\User;
 
-use App\Http\Requests\WishlistRequest;
-use App\Http\Resources\WishlistResource;
+use App\Http\Requests\Wishlist\WishlistRequest;
+use App\Http\Resources\Wishlist\WishlistResource;
 use App\Models\WishlistElement;
 use App\Policies\WishlistPolicy;
 use Auth;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Orion\Http\Controllers\Controller;
 use Orion\Http\Requests\Request;
 

@@ -30,9 +30,9 @@ class ResortPolicy
         User $user
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function update(
@@ -40,9 +40,9 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function delete(
@@ -50,9 +50,9 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function restore(
@@ -60,9 +60,9 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function forceDelete(
@@ -70,8 +70,8 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 }

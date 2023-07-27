@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers\User;
 
-use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
-use App\Http\Resources\LoginResource;
-use App\Http\Resources\LogoutResource;
+use App\Http\Requests\User\LoginRequest;
+use App\Http\Resources\User\LoginResource;
+use App\Http\Resources\User\LogoutResource;
 use Exception;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;

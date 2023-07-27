@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Orion\Http\Requests\Request;
 
-
-class WishlistRequest extends Request
+class UserBlockRequest extends Request
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,7 +15,7 @@ class WishlistRequest extends Request
     public function storeRules(): array
     {
         return [
-            'resort_id' => 'required|integer|exists:resorts,id|min:1'
+            'user_id' => 'required|integer|exists:users,id'
         ];
     }
 }

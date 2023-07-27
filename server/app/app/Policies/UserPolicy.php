@@ -15,10 +15,7 @@ class UserPolicy
         ?User $user
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function view(
@@ -26,10 +23,7 @@ class UserPolicy
         User  $model
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function create(
@@ -44,10 +38,10 @@ class UserPolicy
         User $model
     ): bool
     {
-        if($this->isAdminOrSameUser()) {
-            return $this->authorized()->allowed();
-        }
-        return $this->authorized()->denied();
+
+        return $this->isAdmin() || $model->user_id == \Auth::id()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function delete(
@@ -55,9 +49,9 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function restore(
@@ -65,9 +59,9 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function forceDelete(
@@ -75,9 +69,9 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin() ?
-            $this->authorized()->allowed() :
-            $this->authorized()->denied();
+        return $this->isAdmin()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 }
 

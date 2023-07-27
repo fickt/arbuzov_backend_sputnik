@@ -9,19 +9,8 @@ use Request;
 
 trait ChecksUserAuthority
 {
-    protected function isAdminOrSameUser(): bool
-    {
-        $currentUserId = Request::route('user');
-
-        if (Auth::id() != $currentUserId || !(Auth::user()->role()->first()->name !== RolesEnum::ADMIN)) {
-            return false;
-        }
-        return true;
-    }
-
     protected function isAdmin(): bool
     {
-        var_dump(Auth::user()->role()->first()->name);
-        return Auth::user()->role()->first()->name == RolesEnum::ADMIN;
+        return Auth::user()->role()->first()->name == RolesEnum::ADMIN->value;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resort;
 
-use App\Http\Resources\ResortRecommendationResource;
+use App\Http\Resources\Resort\ResortRecommendationResource;
 use App\Models\ResortRecommendation;
 use App\Policies\ResortRecommendationPolicy;
 use Orion\Http\Controllers\Controller;

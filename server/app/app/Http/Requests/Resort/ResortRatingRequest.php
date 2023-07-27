@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Resort;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Orion\Http\Requests\Request;
 
-class ResortPhotoRequest extends Request
+class ResortRatingRequest extends Request
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,7 +16,8 @@ class ResortPhotoRequest extends Request
     {
         return [
             'resort_id' => 'required|integer|exists:resorts,id',
-            'photo' => 'required|string|min:1|max:255'
+            'comment' => 'string',
+            'rating' => 'required|integer|min:1|max:5'
         ];
     }
 }

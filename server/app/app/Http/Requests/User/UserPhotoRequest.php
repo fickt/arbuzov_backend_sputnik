@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Orion\Http\Requests\Request;
 
-class ResortRatingRequest extends Request
+class UserPhotoRequest extends Request
 {
 
     /**
@@ -15,9 +15,7 @@ class ResortRatingRequest extends Request
     public function storeRules(): array
     {
         return [
-            'resort_id' => 'required|integer|exists:resorts,id',
-            'comment' => 'string',
-            'rating' => 'required|integer|min:1|max:5'
+            'photo' => 'required|string|min:1|max:255'
         ];
     }
 }

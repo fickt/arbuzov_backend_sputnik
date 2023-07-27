@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resort;
 
-use App\Http\Requests\ResortPhotoRequest;
+use App\Http\Requests\Resort\ResortPhotoRequest;
 use App\Models\ResortPhoto;
-use Illuminate\Http\Request;
 use Orion\Http\Controllers\Controller;
 
 class ResortPhotoController extends Controller

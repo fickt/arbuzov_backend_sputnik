@@ -2,29 +2,31 @@
 
 namespace App\Policies;
 
+use App\Models\Notification;
 use App\Models\ResortPhoto;
 use App\Models\User;
-use App\Models\UserPhoto;
 use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
-class ResortPhotoPolicy
+class NotificationPolicy
 {
     use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
-        ?User $user
+        User $user
     ): bool
     {
         return $this->authorized()->allowed();
     }
 
     public function view(
-        ?User       $user,
-        ResortPhoto $model
+        User         $user,
+        Notification $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() || $model->user_id == \Auth::id()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function create(
@@ -37,8 +39,8 @@ class ResortPhotoPolicy
     }
 
     public function update(
-        User        $user,
-        ResortPhoto $model
+        User         $user,
+        Notification $model
     ): bool
     {
         return $this->isAdmin()
@@ -47,8 +49,8 @@ class ResortPhotoPolicy
     }
 
     public function delete(
-        User        $user,
-        ResortPhoto $model
+        User         $user,
+        Notification $model
     ): bool
     {
         return $this->isAdmin()
@@ -57,8 +59,8 @@ class ResortPhotoPolicy
     }
 
     public function restore(
-        User        $user,
-        ResortPhoto $model
+        User         $user,
+        Notification $model
     ): bool
     {
         return $this->isAdmin()
@@ -67,8 +69,8 @@ class ResortPhotoPolicy
     }
 
     public function forceDelete(
-        User        $user,
-        ResortPhoto $model
+        User         $user,
+        Notification $model
     ): bool
     {
         return $this->isAdmin()
