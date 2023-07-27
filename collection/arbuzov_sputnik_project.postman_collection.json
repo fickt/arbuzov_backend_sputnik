@@ -119,67 +119,6 @@
 			"response": []
 		},
 		{
-			"name": "Edit user with id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{ \r\n    \r\n         \"nickname\": \"ArbuzovMichael123456788909182151135142\",\r\n        \"first_name\": \"Michael\",\r\n        \"last_name\": \"Arbuzov\"\r\n   \r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/users/2",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"users",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Get all resorts",
 			"event": [
 				{
@@ -279,48 +218,6 @@
 			"response": []
 		},
 		{
-			"name": "Add photo to resort with id 2",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "resort_id",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "photo",
-							"value": "url/resort/photo",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{host}}/resort-photos",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"resort-photos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Add resort to wishlist",
 			"event": [
 				{
@@ -370,6 +267,54 @@
 					],
 					"path": [
 						"user-wishlist-resorts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all recommendations of user with id 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{host}}/recommendations/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"recommendations",
+						"2"
 					]
 				}
 			},
@@ -539,7 +484,12 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if(jsonData.data.access_token) {\r",
+							"    pm.collectionVariables.set(\"token\", jsonData.data.access_token)\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -577,6 +527,109 @@
 			"response": []
 		},
 		{
+			"name": "Add photo to resort with id 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resort_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"value": "url/resort/photo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/resort-photos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"resort-photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user with id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \r\n         \"nickname\": \"ArbuzovMichael123456788909182151135142\",\r\n        \"first_name\": \"Michael\",\r\n        \"last_name\": \"Arbuzov\"\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/users/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete Resort with id: 2",
 			"event": [
 				{
@@ -591,6 +644,9 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -603,7 +659,13 @@
 					]
 				},
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "*/*",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{host}}/resorts/2",
 					"host": [
@@ -618,23 +680,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all recommendations of user with id 2",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Get all notifications of user with id 2",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -648,31 +694,28 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
 				"url": {
-					"raw": "{{host}}/recommendations",
+					"raw": "{{host}}/notifications/2",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"recommendations"
+						"notifications",
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Admin blocks user with id 1",
+			"name": "Admin blocks user with id 2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
 						"type": "text/javascript"
