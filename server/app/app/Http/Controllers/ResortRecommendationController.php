@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Policies\ResortRecommendationPolicy;
 use Orion\Http\Controllers\Controller;
 
 class ResortRecommendationController extends Controller
