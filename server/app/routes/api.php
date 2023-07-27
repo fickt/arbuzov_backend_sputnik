@@ -35,7 +35,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 Route::group(['as' => 'api.', 'middleware' => CheckUserBlock::class], function () {
     /* Users */
-    Orion::resource('users', UserController::class);
+    Orion::resource('users', UserController::class)->withoutMiddleware(CheckUserBlock::class);
     Orion::resource('user-photos', UserPhotoController::class);
     Orion::resource('user-blocks', UserBlockController::class);
     Orion::resource('user-wishlist-resorts', UserWishlistController::class);

@@ -66,7 +66,7 @@ class Resort extends Model
     {
         return $this->hasMany(ResortPhoto::class);
     }
-    
+
     public function ratings(): HasMany
     {
         return $this->hasMany(ResortRating::class, 'resort_id', 'id');

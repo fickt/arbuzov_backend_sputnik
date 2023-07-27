@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\UserPhoto;
 use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
