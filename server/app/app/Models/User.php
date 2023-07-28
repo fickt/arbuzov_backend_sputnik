@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -77,9 +76,35 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(UserPhoto::class);
     }
 
+    /**
+     * Блокирует/разблокирует User
+     *
+     * @return void
+     */
+    public function block(): void
+    {
+        $this->is_blocked = !($this->is_blocked);
+        if ($this->is_blocked) {
+            Notification::query()->create([
+                'title' => 'Your account has been blocked!',
+                'content' => 'Your account has been suspended so you are no longer able to proceed any further :(',
+                'user_id' => $this->id,
+                'sent_at' => Carbon::now()
+            ]);
+        } else {
+            Notification::query()->create([
+                'title' => 'Your account has been unblocked!',
+                'content' => 'Access to your account has been restored, therefore be careful next time, we are watching you buddy >:)',
+                'user_id' => $this->id,
+                'sent_at' => Carbon::now()
+            ]);
+        }
+    }
+
     public function resortWishlist(): BelongsToMany
     {
-        return $this->belongsToMany(Resort::class,
+        return $this->belongsToMany(
+            Resort::class,
             'user_resort_wishlist',
             'user_id',
             'resort_id'

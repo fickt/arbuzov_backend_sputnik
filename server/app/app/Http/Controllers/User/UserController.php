@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Requests\User\UserRequest;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use App\Policies\UserPolicy;
-use Illuminate\Database\Eloquent\Model;
 use Orion\Http\Controllers\Controller;
-use Orion\Http\Requests\Request;
 
 class UserController extends Controller
 {

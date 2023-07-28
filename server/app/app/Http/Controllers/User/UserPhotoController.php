@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Requests\UserPhotoRequest;
-use App\Http\Resources\UserPhotoResource;
+use App\Http\Requests\User\UserPhotoRequest;
+use App\Http\Resources\User\UserPhotoResource;
 use App\Models\UserPhoto;
 use App\Policies\UserPhotoPolicy;
-use Auth;
-use Illuminate\Database\Eloquent\Model;
 use Orion\Http\Controllers\Controller;
-use Orion\Http\Requests\Request;
 
 class UserPhotoController extends Controller
 

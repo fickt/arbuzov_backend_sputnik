@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,10 +27,21 @@ class WishlistElement extends Model
         'visit_date'
     ];
 
+    public function resort(): BelongsTo
+    {
+        return $this->belongsTo(Resort::class);
+    }
+
     public static function boot(): void
     {
         self::creating(fn(self $model) => $model->performCreatingActions());
+        self::created(fn(self $model) => $model->performCreatedActions());
         parent::boot();
+    }
+
+    private function performCreatedActions(): void
+    {
+        $this->addRecommendationsToUser();
     }
 
     private function performCreatingActions(): void
@@ -52,6 +64,25 @@ class WishlistElement extends Model
         if ($resort) {
             throw new Exception('User has a resort with id:' . $this->resort_id . ' in wishlist already!',
                 Response::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
+    private function addRecommendationsToUser(): void
+    {
+        $resort = $this->resort()->first();
+
+        $resorts = Resort::query()->whereHas('country', function ($q) use ($resort) {
+            $q->where('id', '=', $resort->country_id);
+        })->get();
+
+        foreach ($resorts as $resort) {
+            var_dump(Auth::id());
+            ResortRecommendation::query()->create(
+                [
+                    'user_id' => Auth::id(),
+                    'resort_id' => $resort->id
+                ]
             );
         }
     }

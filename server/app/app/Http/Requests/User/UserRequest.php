@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Orion\Http\Requests\Request;
 
@@ -17,7 +17,7 @@ class UserRequest extends Request
         return [
             'nickname' => 'string|min:1|max:255',
             'first_name' => 'string|min:1|max:255',
-            'last_name' => 'string|min:1|max:255|'
+            'last_name' => 'string|min:1|max:255'
         ];
     }
 

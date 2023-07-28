@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         RoleSeeder::run();
         UserSeeder::run();
+        CountrySeeder::run();
         ResortSeeder::run();
         ResortCategorySeeder::run();
         ResortCategoryToResortSeeder::run();

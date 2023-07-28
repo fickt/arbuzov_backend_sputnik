@@ -2,75 +2,73 @@
 
 namespace App\Policies;
 
-use App\Models\Resort;
+use App\Models\ResortRecommendation;
 use App\Models\User;
 use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
-class ResortPolicy
+class ResortRecommendationPolicy
 {
     use HandlesAuthorization, ChecksUserAuthority;
 
     public function viewAny(
-        ?User $user
+        User $user
     ): bool
     {
         return $this->authorized()->allowed();
     }
 
     public function view(
-        ?User  $user,
-        Resort $model
+        User                 $user,
+        ResortRecommendation $model
     ): bool
     {
-        return $this->authorized()->allowed();
+        return $this->isAdmin() || $model->user_id == \Auth::id()
+            ? $this->authorized()->allowed()
+            : $this->authorized()->denied();
     }
 
     public function create(
         User $user
     ): bool
     {
-        return $this->isAdmin()
-            ? $this->authorized()->allowed()
-            : $this->authorized()->denied();
+        return $this->authorized()->denied();
     }
 
     public function update(
-        User   $user,
-        Resort $model
+        User                 $user,
+        ResortRecommendation $model
     ): bool
     {
-        return $this->isAdmin()
-            ? $this->authorized()->allowed()
-            : $this->authorized()->denied();
+        return $this->authorized()->denied();
     }
 
     public function delete(
-        User   $user,
-        Resort $model
+        User                 $user,
+        ResortRecommendation $model
     ): bool
     {
-        return $this->isAdmin()
+        return $this->isAdmin() || $model->user_id == \Auth::id()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
 
     public function restore(
-        User   $user,
-        Resort $model
+        User                 $user,
+        ResortRecommendation $model
     ): bool
     {
-        return $this->isAdmin()
+        return $this->isAdmin() || $model->user_id == \Auth::id()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
 
     public function forceDelete(
-        User   $user,
-        Resort $model
+        User                 $user,
+        ResortRecommendation $model
     ): bool
     {
-        return $this->isAdmin()
+        return $this->isAdmin() || $model->user_id == \Auth::id()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
