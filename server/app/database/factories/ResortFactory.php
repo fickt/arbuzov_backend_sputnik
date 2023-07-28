@@ -24,6 +24,9 @@ class ResortFactory extends Factory
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
             'country_id' => rand(self::FROM_COUNTRY_ID, self::TO_COUNTRY_ID)
+            //выглядит костыльно, оно только для двух стран генерит?
+            //немного потерял смысл констант в этом месте, возможно вместо TO_COUNTRY_ID 
+            //стоило использовать CountrySeeder::COUNTY_NUMBER
         ];
     }
 }

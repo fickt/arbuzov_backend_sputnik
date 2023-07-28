@@ -51,7 +51,9 @@ class ResortRating extends Model
         $resort = ResortRating::query()->where(
             'resort_id', '=', $this->resort_id,
             'and',
-            'user_id', '=', Auth::id())->exists();
+            'user_id', '=', Auth::id())->exists(); 
+            //не очень красиво отформатировал, не сразу видно где where кончается
+            //я бы перенес )->exists(); наследующую строку
 
         if ($resort) {
             throw new Exception('User has already rated Resort with id: ' . $this->resort_id,
