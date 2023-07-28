@@ -16,7 +16,7 @@ class ResortRatingRequest extends Request
     {
         return [
             'resort_id' => 'required|integer|exists:resorts,id',
-            'comment' => 'string',
+            'comment' => 'string', //ограничение по длине у всех строковых, текст, например max:1000
             'rating' => 'required|integer|min:1|max:5'
         ];
     }

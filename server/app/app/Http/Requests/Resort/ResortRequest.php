@@ -18,7 +18,7 @@ class ResortRequest extends Request
         return [
             [
                 'name' => 'required|string|unique:resorts,name|min:1|max:255',
-                'description' => 'required|string',
+                'description' => 'required|string', //max:
                 'longitude' => 'required|float',
                 'latitude' => 'required|float',
             ]

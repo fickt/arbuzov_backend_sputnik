@@ -37,6 +37,6 @@ class AuthController extends Controller
     public function logout(): LogoutResource
     {
         auth()->logout();
-        return new LogoutResource('');
+        return new LogoutResource(''); // можно без ''???
     }
 }

@@ -14,7 +14,7 @@ use Orion\Http\Requests\Request;
 class UserWishlistController extends Controller
 {
     protected $request = WishlistRequest::class;
-    protected $model = WishlistElement::class;
+    protected $model = WishlistElement::class; //названия {{model_name}}+controller/request/policy etc...
     protected $policy = WishlistPolicy::class;
     protected $resource = WishlistResource::class;
 
