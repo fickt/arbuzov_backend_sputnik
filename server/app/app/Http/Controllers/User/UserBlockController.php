@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Orion\Http\Controllers\Controller;
 use Orion\Http\Requests\Request;
 
-class UserBlockController extends Controller
+class UserBlockController extends Controller //названия {{model_name}}+controller/request/policy etc...
 {
     protected $request = UserBlockRequest::class;
     protected $model = User::class;
