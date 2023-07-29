@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserAuthResource extends JsonResource
+class UserAuthResource extends JsonResource // Нигде не используется, если я правильно понимаю
 {
     /**
      * Transform the resource into an array.

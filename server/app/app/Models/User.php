@@ -81,7 +81,9 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return void
      */
-    public function block(): void
+    //название не полностью отражает смысл функции
+    //возможно стоило придумать что-то вроде switchBlockingStatus или типо того
+    public function block(): void 
     {
         $this->is_blocked = !($this->is_blocked);
         if ($this->is_blocked) {

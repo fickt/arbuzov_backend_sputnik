@@ -91,6 +91,8 @@ class Resort extends Model
             Notification::query()->create([
                 'title' => 'Resort has been deleted!',
                 'content' => 'Resort "' . $this->name . '" has been deleted so it is no longer in your wishlist!',
+                //для встраивания значений в строку можно использовать строку с двойными кавычками
+                //например "text \"$this->name\" text" 
                 'user_id' => $user->id,
                 'sent_at' => Carbon::now()
             ]);

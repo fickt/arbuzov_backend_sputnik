@@ -27,7 +27,7 @@ services:
     image: postgres:15
     container_name: db
     ports:
-      - ${DB_PORT:-5432}:${DB_PORT:-5432}
+      - ${DB_PORT:-5432}:${DB_PORT:-5432} 
     environment:
         - POSTGRES_HOST_AUTH_METHOD=trust
         - POSTGRES_DB=${DB_DATABASE:-postgres}

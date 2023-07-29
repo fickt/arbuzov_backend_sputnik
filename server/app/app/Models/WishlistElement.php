@@ -34,6 +34,13 @@ class WishlistElement extends Model
 
     public static function boot(): void
     {
+        //Вместо стрелочной функции, можно использовать просто анонимную,
+        //тогда можно не использовать вспомогательные методы, вызывающие остальные методы
+        //например:
+        // self::created(function (self $model) {
+        //     $model->checkIfResortInWishlistAlreadyExists();
+        //     $model->putUserId();
+        // });
         self::creating(fn(self $model) => $model->performCreatingActions());
         self::created(fn(self $model) => $model->performCreatedActions());
         parent::boot();
@@ -56,9 +63,13 @@ class WishlistElement extends Model
      */
     private function checkIfResortInWishlistAlreadyExists(): void
     {
+        //по-моему неудачное название для булевой переменной
+        //обычно называют isЧтоНибудь, hasЧтоНибудь
         $resort = Auth::user()
             ->resortWishlist()
             ->where('resort_id', '=', $this->resort_id)
+            //вроде необязательно = использовать в where()
+            //можно короче where('resort_id', $this->resort_id)
             ->exists();
 
         if ($resort) {
@@ -77,7 +88,7 @@ class WishlistElement extends Model
         })->get();
 
         foreach ($resorts as $resort) {
-            var_dump(Auth::id());
+            var_dump(Auth::id());//видимо забыл при дебаге :)
             ResortRecommendation::query()->create(
                 [
                     'user_id' => Auth::id(),

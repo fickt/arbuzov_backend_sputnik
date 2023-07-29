@@ -2,7 +2,7 @@
 
 namespace app\Http\Controllers\User;
 
-use App\Http\Requests\RegistrationRequest;
+use App\Http\Requests\RegistrationRequest; //неиспользуемые импорты, надо бы убирать
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Resources\User\LoginResource;
 use App\Http\Resources\User\LogoutResource;
@@ -24,6 +24,9 @@ class AuthController extends Controller
     {
         if (!$token = auth()->attempt($request->validated())) {
             throw new Exception('Unauthorized', ResponseAlias::HTTP_UNAUTHORIZED);
+            // в Exception handlere код вытаскивается методом getStatusCode, которого в этом exception нет
+            // и в случае ошибки вернется 500 а не 401, можно создать собственное исключение с этим методом
+            // или найти готовое, например HttpException.
         }
 
         return new LoginResource($token);
