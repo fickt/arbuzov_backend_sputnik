@@ -16,7 +16,7 @@ class NotificationController extends Controller
 
     protected function buildIndexFetchQuery(Request $request, array $requestedRelations): Builder
     {
-        $query = parent::buildFetchQuery($request, $requestedRelations);
+        $query = parent::buildIndexFetchQuery($request, $requestedRelations);
         $query->where('user_id', '=', Auth::id());
         return $query;
     }
