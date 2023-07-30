@@ -49,9 +49,10 @@ class ResortRating extends Model
     private function checkIfUserAlreadyHasRatedResort(): void
     {
         $resort = ResortRating::query()->where(
-            ['resort_id', '=', $this->resort_id],
-            ['user_id', '=', Auth::id()]
-        )
+            [
+                'resort_id' => $this->resort_id,
+                'user_id', '=', Auth::id()
+            ])
             ->exists();
 
         if ($resort) {
