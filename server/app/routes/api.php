@@ -46,7 +46,7 @@ Route::group(['as' => 'api.', 'middleware' => CheckUserBlock::class], function (
     Orion::resource('resort-photos', ResortPhotoController::class);
     Orion::resource('recommendations', ResortRecommendationController::class);
 
-    Orion::resource('notifications', NotificationController::class)->withoutMiddleware(CheckUserBlock::class);;
+    Orion::resource('notifications', NotificationController::class)->withoutMiddleware(CheckUserBlock::class);
 
 });
 
