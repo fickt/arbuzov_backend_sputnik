@@ -733,25 +733,25 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "user_id",
-							"value": "2",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"is_blocked\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "{{host}}/user-blocks",
+					"raw": "{{host}}/users/2",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"user-blocks"
+						"users",
+						"2"
 					]
 				}
 			},
@@ -781,7 +781,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://127.0.0.1:8000/api"
+			"value": "http://127.0.0.1:8080/api"
 		},
 		{
 			"key": "token",
