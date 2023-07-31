@@ -11,6 +11,6 @@ trait ChecksUserAuthority
 {
     protected function isAdmin(): bool
     {
-        return Auth::user()->role()->first()->name == RolesEnum::ADMIN->value;
+        return Auth::user()->role()->first()->name === RolesEnum::ADMIN->value;
     }
 }
