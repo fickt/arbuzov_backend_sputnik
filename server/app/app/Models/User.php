@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RolesEnum;
-use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,8 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
+use Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -77,13 +80,13 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Блокирует/разблокирует User
+     * Блокирует/разблокирует User и отправляет соответствующий
+     * Notification to User
      *
      * @return void
      */
-    public function block(): void
+    public function changeBlockStatus(): void
     {
-        $this->is_blocked = !($this->is_blocked);
         if ($this->is_blocked) {
             Notification::query()->create([
                 'title' => 'Your account has been blocked!',
@@ -115,6 +118,8 @@ class User extends Authenticatable implements JWTSubject
     {
         self::creating(fn(self $model) => $model->assignUserRoleToUser());
         self::created(fn(self $model) => $model->sendUserCreatedNotificationsToAdmins());
+
+        self::saving(fn(self $model) => $model->checkIfUserIsBeingBlocked());
         parent::boot();
     }
 
@@ -160,5 +165,23 @@ class User extends Authenticatable implements JWTSubject
             ->where('name', '=', RolesEnum::USER)
             ->first();
         $this->role()->associate($userRole);
+    }
+
+    /**
+     * Проверяет, пытаются ли через PATCH/PUT запрос заблокировать/разблокировать User посредством передачи
+     * поля is_blocked в request body, если поле присутствует в request, идёт проверка наличие роли ADMIN,
+     * если таковая имеется, то указанный User блокируется/разблокируется
+     *
+     * @return void
+     */
+    private function checkIfUserIsBeingBlocked(): void
+    {
+        if (!is_null(Request::input('is_blocked'))) {
+            if (!Auth::user()->role()->first()->name == RolesEnum::ADMIN->value) {
+                throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Unauthorized');
+            }
+            $this->is_blocked = (bool)Request::input('is_blocked');
+            $this->changeBlockStatus();
+        }
     }
 }

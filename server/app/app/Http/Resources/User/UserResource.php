@@ -21,7 +21,8 @@ class UserResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'photos' => $this->whenLoaded('photos'),
-            'role' => $this->whenLoaded('role')
+            'role' => $this->whenLoaded('role'),
+            'is_blocked' => $this->is_blocked
         ];
     }
 }

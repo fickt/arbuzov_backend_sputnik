@@ -38,7 +38,6 @@ class UserPolicy
         User $model
     ): bool
     {
-
         return $this->isAdmin() || $model->user_id == \Auth::id()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
