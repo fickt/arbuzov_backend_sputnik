@@ -51,7 +51,7 @@ class ResortRating extends Model
         $resort = ResortRating::query()->where(
             [
                 'resort_id' => $this->resort_id,
-                'user_id', '=', Auth::id()
+                'user_id' => Auth::id()
             ])
             ->exists();
 

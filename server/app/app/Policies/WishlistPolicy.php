@@ -4,12 +4,11 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\WishlistElement;
-use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class WishlistPolicy
 {
-    use HandlesAuthorization, ChecksUserAuthority;
+    use HandlesAuthorization;
 
     public function viewAny(
         User $user

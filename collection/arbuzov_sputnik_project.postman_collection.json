@@ -695,13 +695,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/notifications/2",
+					"raw": "{{host}}/notifications",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"notifications",
-						"2"
+						"notifications"
 					]
 				}
 			},
@@ -714,8 +713,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -781,7 +780,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://127.0.0.1:8080/api"
+			"value": "http://127.0.0.1:8000/api"
 		},
 		{
 			"key": "token",

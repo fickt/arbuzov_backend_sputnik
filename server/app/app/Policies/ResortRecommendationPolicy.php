@@ -4,12 +4,11 @@ namespace App\Policies;
 
 use App\Models\ResortRecommendation;
 use App\Models\User;
-use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class ResortRecommendationPolicy
 {
-    use HandlesAuthorization, ChecksUserAuthority;
+    use HandlesAuthorization;
 
     public function viewAny(
         User $user
@@ -23,9 +22,7 @@ class ResortRecommendationPolicy
         ResortRecommendation $model
     ): bool
     {
-        return $user->isAdmin() || $model->user_id == \Auth::id()
-            ? $this->authorized()->allowed()
-            : $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function create(
@@ -48,7 +45,7 @@ class ResortRecommendationPolicy
         ResortRecommendation $model
     ): bool
     {
-        return $user->isAdmin() || $model->user_id == \Auth::id()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -58,7 +55,7 @@ class ResortRecommendationPolicy
         ResortRecommendation $model
     ): bool
     {
-        return $user->isAdmin() || $model->user_id == \Auth::id()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -68,7 +65,7 @@ class ResortRecommendationPolicy
         ResortRecommendation $model
     ): bool
     {
-        return $user->isAdmin() || $model->user_id == \Auth::id()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

@@ -1,7 +1,7 @@
 <?php
 
 
-use app\Http\Controllers\Notification\NotificationController;
+use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\Resort\ResortController;
 use App\Http\Controllers\Resort\ResortPhotoController;
 use App\Http\Controllers\Resort\ResortRatingController;
