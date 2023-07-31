@@ -77,7 +77,6 @@ class WishlistElement extends Model
         })->get();
 
         foreach ($resorts as $resort) {
-            var_dump(Auth::id());
             ResortRecommendation::query()->create(
                 [
                     'user_id' => Auth::id(),

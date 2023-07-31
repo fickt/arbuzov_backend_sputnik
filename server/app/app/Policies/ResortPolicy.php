@@ -4,12 +4,11 @@ namespace App\Policies;
 
 use App\Models\Resort;
 use App\Models\User;
-use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class ResortPolicy
 {
-    use HandlesAuthorization, ChecksUserAuthority;
+    use HandlesAuthorization;
 
     public function viewAny(
         ?User $user
@@ -30,7 +29,7 @@ class ResortPolicy
         User $user
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -40,7 +39,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -50,7 +49,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -60,7 +59,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -70,7 +69,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

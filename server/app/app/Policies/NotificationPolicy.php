@@ -3,14 +3,12 @@
 namespace App\Policies;
 
 use App\Models\Notification;
-use App\Models\ResortPhoto;
 use App\Models\User;
-use App\Policies\Traits\ChecksUserAuthority;
 use Orion\Concerns\HandlesAuthorization;
 
 class NotificationPolicy
 {
-    use HandlesAuthorization, ChecksUserAuthority;
+    use HandlesAuthorization;
 
     public function viewAny(
         User $user
@@ -24,16 +22,14 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin() || $model->user_id == \Auth::id()
-            ? $this->authorized()->allowed()
-            : $this->authorized()->denied();
+        return $this->authorized()->allowed();
     }
 
     public function create(
         User $user
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -43,7 +39,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -53,7 +49,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -63,7 +59,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -73,7 +69,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

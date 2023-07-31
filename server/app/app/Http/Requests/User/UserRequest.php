@@ -17,7 +17,8 @@ class UserRequest extends Request
         return [
             'nickname' => 'string|min:1|max:255',
             'first_name' => 'string|min:1|max:255',
-            'last_name' => 'string|min:1|max:255'
+            'last_name' => 'string|min:1|max:255',
+            'is_blocked' => 'boolean'
         ];
     }
 

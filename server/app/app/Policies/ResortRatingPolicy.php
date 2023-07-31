@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\ResortRating;
 use App\Models\User;
-use App\Models\UserPhoto;
 use Orion\Concerns\HandlesAuthorization;
 
 class ResortRatingPolicy

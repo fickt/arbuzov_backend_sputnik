@@ -16,8 +16,8 @@ class ResortRatingRequest extends Request
     {
         return [
             'resort_id' => 'required|integer|exists:resorts,id',
-            'comment' => 'string',
-            'rating' => 'required|integer|min:1|max:5'
+            'comment' => 'string|max:5000',
+            'rating' => 'required|integer|between:1,5'
         ];
     }
 }
