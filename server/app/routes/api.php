@@ -7,7 +7,6 @@ use App\Http\Controllers\Resort\ResortPhotoController;
 use App\Http\Controllers\Resort\ResortRatingController;
 use App\Http\Controllers\Resort\ResortRecommendationController;
 use App\Http\Controllers\User\AuthController;
-use App\Http\Controllers\User\UserBlockController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserPhotoController;
 use App\Http\Controllers\User\UserWishlistController;
@@ -37,7 +36,6 @@ Route::group(['as' => 'api.', 'middleware' => CheckUserBlock::class], function (
     /* Users */
     Orion::resource('users', UserController::class)->withoutMiddleware(CheckUserBlock::class);
     Orion::resource('user-photos', UserPhotoController::class);
-    Orion::resource('user-blocks', UserBlockController::class);
     Orion::resource('user-wishlist-resorts', UserWishlistController::class);
     Orion::resource('resorts', ResortController::class);
 
@@ -47,6 +45,5 @@ Route::group(['as' => 'api.', 'middleware' => CheckUserBlock::class], function (
     Orion::resource('recommendations', ResortRecommendationController::class);
 
     Orion::resource('notifications', NotificationController::class)->withoutMiddleware(CheckUserBlock::class);
-
 });
 
