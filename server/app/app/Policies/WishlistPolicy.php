@@ -24,7 +24,7 @@ class WishlistPolicy
         WishlistElement $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

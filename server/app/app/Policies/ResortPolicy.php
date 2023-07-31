@@ -30,7 +30,7 @@ class ResortPolicy
         User $user
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -40,7 +40,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -50,7 +50,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -60,7 +60,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -70,7 +70,7 @@ class ResortPolicy
         Resort $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

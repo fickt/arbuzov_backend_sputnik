@@ -24,7 +24,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin() || $model->user_id == \Auth::id()
+        return $user->isAdmin() || $model->user_id == \Auth::id()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -33,7 +33,7 @@ class NotificationPolicy
         User $user
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -43,7 +43,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -53,7 +53,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -63,7 +63,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -73,7 +73,7 @@ class NotificationPolicy
         Notification $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

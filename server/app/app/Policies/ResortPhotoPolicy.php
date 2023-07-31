@@ -31,7 +31,7 @@ class ResortPhotoPolicy
         User $user
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -41,7 +41,7 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -51,7 +51,7 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -61,7 +61,7 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -71,7 +71,7 @@ class ResortPhotoPolicy
         ResortPhoto $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }

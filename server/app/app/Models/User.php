@@ -79,6 +79,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(UserPhoto::class);
     }
 
+    public function isAdmin(): bool
+    {
+        return Auth::user()->role()->first()->name == RolesEnum::ADMIN->value;
+    }
+
     /**
      * Блокирует/разблокирует User и отправляет соответствующий
      * Notification to User

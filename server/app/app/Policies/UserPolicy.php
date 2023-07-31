@@ -38,7 +38,7 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin() || $model->user_id == \Auth::id()
+        return $user->isAdmin() || $model->user_id == \Auth::id()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -48,7 +48,7 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -58,7 +58,7 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
@@ -68,7 +68,7 @@ class UserPolicy
         User $model
     ): bool
     {
-        return $this->isAdmin()
+        return $user->isAdmin()
             ? $this->authorized()->allowed()
             : $this->authorized()->denied();
     }
